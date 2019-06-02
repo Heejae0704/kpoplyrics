@@ -276,7 +276,7 @@ function handleRomanizedLyrics(){
 function getOriginalLyrics(keyword){
   console.log("getOriginalLyrics runs!")
 
-  $.getJSON('https://www.whateverorigin.org/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
+  $.getJSON('https://www.whateverorigin.herokuapp.com/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
     let lyrics = $(data.contents).find("div.lyrics").text();
     // show lyrics in div#original-lyrics-text with <br> in each line
 
