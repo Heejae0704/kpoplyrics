@@ -254,6 +254,7 @@ function searchQueryBuilder(textArr){
       }
   }
   var queryString = queryStringArr.join("")
+  console.log(queryString)
   return queryString;
 }
 
@@ -287,7 +288,7 @@ function handleTranslatedLyrics(){
     let oriLyricsText = htmlToText(oriLyrics);
     let oriLyricsTextArr = makeStrArr(oriLyricsText);
     let queryString = searchQueryBuilder(oriLyricsTextArr);
-    let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en"
+    let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
     getTrans(url);
     }
 })
