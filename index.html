@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="web application showing KPOP music video, original lyrics, romanized and translated lyrics.">
+    <title>KPOP MV and Lyrics</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <main>
+        <header>
+            <p>Type in the name of a K-pop song and the artist to Get the Video and Lyrics!</p> 
+            <p>(Original/Romanized/Translated)</p>
+        </header>
+        <section>
+            <form class="first-input">
+                <label for="song">Artist & Song Name: </label>
+                <input name="song" id="song" type="text" placeholder="BTS Boys with luv" />
+                <input class="submit-input" type="submit" value="Search">
+            </form>
+        </section>
+        <iframe class="video" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id="original-lyrics-text"></div>
+        <section>
+            <form class="romanized-lyrics">
+                <input class="submit-romanized-lyrics-button" type="submit" value="Get Romanized Lyrics!">
+            </form>
+        </section>
+        <div id="romanized-lyrics-text"></div>
+        <section>
+            <form class="translated-lyrics">
+                <input class="submit-translated-lyrics-button" type="submit" value="Get Translated Lyrics!">
+            </form>
+        </section>
+        <div id="translated-lyrics-text"></div>
+    </main>
+        <script
+        src="http://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+</body>
+</html>
