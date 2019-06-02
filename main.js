@@ -4,6 +4,18 @@
 // and extract the videoId of the top result
 // and use the videoId to load the IFrame player API
 
+'use strict'
+
+function lyricsToHtml(text){
+  let textArr = text.trim().split("\n")
+  let htmlStr = "";
+  for (let i=0; i<textArr.length; i++){
+    let tempText = textArr[i] + "<br>\n"
+    htmlStr = htmlStr.concat(tempText)
+  }
+  return htmlStr;
+}
+
 String.prototype.toKorChars = function() { 
   var cCho = [ 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cJung = [ 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ' ], cJong = [ '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cho, jung, jong; 
   var str = this, cnt = str.length, chars = [], cCode; 
@@ -218,8 +230,6 @@ function romanizeLyrics(lyrics){
   return romanizeLyrics;
 }
 
-
-
 function searchQueryBuilder(textArr){
   let queryStringArr = []
   for(let i=0; i<textArr.length; i++){
@@ -277,30 +287,40 @@ function findTopResult(arr){
   let rank = 0;
   let topResultAddress = ""
   for (let i = 0; i < arr.length; i++){
-    if(rank < Number(arr[i].stats.pageviews)){
-      topResultAddress = arr[i].url;
+    if(arr[i].result.stats.pageviews && rank < Number(arr[i].result.stats.pageviews)){
+      rank = Number(arr[i].result.stats.pageviews);
+      topResultAddress = arr[i].result.url;
     } else {continue;}
   }
+  console.log(topResultAddress)
   return topResultAddress;
 }
 
 
+
 function getOriginalLyrics(keyword){
   console.log("getOriginalLyrics runs!")
-  let url = 'https://api.genius.com/search?q=' + keyword;
-  const options = {
-    headers: new Headers({
-      "Authorization": 'Bearer AUBy1qVk1NtL9VvhnALD89u7Q2axaVwprMEgoxQ2bvRgYDvXJJeMtmSYurHR6xxf'})
-  };
-  fetch(url, options)
+  let url = 'https://api.genius.com/search?q=' + keyword + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  // const options = {
+  //   headers: new Headers({
+  //     "Authorization": 'Bearer AUBy1qVk1NtL9VvhnALD89u7Q2axaVwprMEgoxQ2bvRgYDvXJJeMtmSYurHR6xxf',
+  //     "Access-Control-Allow-Origin" : "*"
+  //   })
+  // };
+  fetch(url)
   .then(response => response.json())
   .then(responseJson => {
+    console.log(responseJson.response.hits)
     let geniusAddress = findTopResult(responseJson.response.hits)
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(geniusAddress) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
+      let lyricsHtml = lyricsToHtml(lyrics);
       // show lyrics in div#original-lyrics-text with <br> in each line
-      console.log(lyrics.trim());
-      console.log(romanizeLyrics(lyrics.trim()));
+      $('div#original-lyrics-text').html(lyricsHtml);
+    })
+    .then(function(){
+      $('.romanized-lyrics').removeClass('hidden');
+      // $('.translated-lyrics').removeClass('hidden');
     });
   
   })
@@ -312,8 +332,8 @@ function getOriginalLyrics(keyword){
     let lyrics = $(data.contents).find("div.lyrics").text();
     // show lyrics in div#original-lyrics-text with <br> in each line
 
-    console.log(lyrics);
-    console.log(romanizeLyrics(lyrics.trim()));
+    // console.log(lyrics);
+    // console.log(romanizeLyrics(lyrics.trim()));
 });
 
 
