@@ -288,7 +288,11 @@ function findTopResult(arr){
 function getOriginalLyrics(keyword){
   console.log("getOriginalLyrics runs!")
   let url = 'https://api.genius.com/search?q=' + keyword;
-  fetch(url)
+  const options = {
+    headers: new Headers({
+      "Authorization": 'Bearer AUBy1qVk1NtL9VvhnALD89u7Q2axaVwprMEgoxQ2bvRgYDvXJJeMtmSYurHR6xxf'})
+  };
+  fetch(url, options)
   .then(response => response.json())
   .then(responseJson => {
     let geniusAddress = findTopResult(responseJson.response.hits)
