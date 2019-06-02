@@ -254,7 +254,6 @@ function searchQueryBuilder(textArr){
       }
   }
   var queryString = queryStringArr.join("")
-  console.log(queryString)
   return queryString;
 }
 
