@@ -268,7 +268,7 @@ function getTrans(url){
     }
     let translatedLyrics = translatedLyricsArr.join('<br>\n');
     $('div#translated-lyrics-text').html(translatedLyrics);
-    transLyrics = $('div#translated-lyrics-text').html(translatedLyrics); 
+    transLyrics = $('div#translated-lyrics-text').html(); 
   })
   .then(function(){
     $('.romanized-lyrics').removeClass('hidden');
