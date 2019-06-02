@@ -6,6 +6,10 @@
 
 'use strict'
 
+var oriLyrics = "";
+var romLyrics = "";
+var transLyrics = "";
+
 function lyricsToHtml(text){
   let textArr = text.trim().split("\n")
   let htmlStr = "";
@@ -14,6 +18,16 @@ function lyricsToHtml(text){
     htmlStr = htmlStr.concat(tempText)
   }
   return htmlStr;
+}
+
+function htmlToText(htmlStr){
+  let htmlStrArr = htmlStr.split("<br>\n")
+  let text = "";
+  for (let i=0; i<htmlStrArr.length; i++){
+    let tempText = htmlStrArr[i] + "\n"
+    text = text.concat(tempText)
+  }
+  return text;
 }
 
 String.prototype.toKorChars = function() { 
@@ -230,6 +244,14 @@ function romanizeLyrics(lyrics){
   return romanizeLyrics;
 }
 
+function makeStrArr(str) {
+  var strArr = str.split('\n')
+  for (let i = 0; i < strArr.length; i++){
+      strArr[i] = "q=" + strArr[i] + "&"
+  }
+  return strArr;  
+}
+
 function searchQueryBuilder(textArr){
   let queryStringArr = []
   for(let i=0; i<textArr.length; i++){
@@ -243,19 +265,6 @@ function searchQueryBuilder(textArr){
   return queryString;
 }
 
-function makeStrArr(str) {
-  var strArr = str.split('\n')
-  for (let i = 0; i < strArr.length; i++){
-      strArr[i] = "q=" + strArr[i] + "&"
-  }
-  return strArr;  
-}
-
-// let dataArr = makeStrArr(DATA);
-// let searchQuery = searchQueryBuilder(dataArr);
-
-// let url = "https://translation.googleapis.com/language/translate/v2?" + searchQuery + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en"
-
 function getTrans(url){
   fetch(url)
   .then(response => response.json())
@@ -268,26 +277,63 @@ function getTrans(url){
     let translatedLyrics = translatedLyricsArr.join('<br>\n');
     $('div#translated-lyrics-text').html(translatedLyrics);
   })
+  .then(function(){
+    transLyrics = $('div#translated-lyrics-text').html(translatedLyrics);
+    $('.romanized-lyrics').removeClass('hidden');
+    $('.translated-lyrics').addClass('hidden');
+    $('.original-lyrics').removeClass('hidden');
+  })
 }
 
 function handleTranslatedLyrics(){
   $('form.translated-lyrics').submit(event => {
     event.preventDefault();
+    $('div#original-lyrics-text').empty();
+    $('div#romanized-lyrics-text').empty();
+    if (transLyrics !== "") {
+      $('div#translated-lyrics-text').html(transLyrics);
+    } else {
+    let oriLyricsText = htmlToText(oriLyrics);
+    let oriLyricsTextArr = makeStrArr(oriLyricsText);
+    let queryString = searchQueryBuilder(oriLyricsTextArr);
+    let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en"
     getTrans(url);
+    }
+})
+}
+
+function getOriginalLyricsAgain(){
+  $('form.original-lyrics').submit(event => {
+    event.preventDefault();
+    $('div#original-lyrics-text').html(oriLyrics)
+    $('div#translated-lyrics-text').empty()
+    $('div#romanized-lyrics-text').empty();
+    $('.romanized-lyrics').removeClass('hidden');
+    $('.translated-lyrics').removeClass('hidden');
+    $('.original-lyrics').addClass('hidden');
 })
 }
 
 function handleRomanizedLyrics(){
-  // get div#original-lyrics-text and trim <br>s
-  // run romanizeLyrics function on the text
-  // show lyrics in div#romanized-lyrics-text with <br> in each line
+  $('form.romanized-lyrics').submit(event => {
+    event.preventDefault();
+    let oriLyricsText = htmlToText(oriLyrics);
+    let romLyricsText = romanizeLyrics(oriLyricsText);
+    romLyrics = lyricsToHtml(romLyricsText);
+    $('div#original-lyrics-text').empty()
+    $('div#translated-lyrics-text').empty()
+    $('div#romanized-lyrics-text').html(romLyrics);
+    $('.romanized-lyrics').addClass('hidden');
+    $('.translated-lyrics').removeClass('hidden');
+    $('.original-lyrics').removeClass('hidden');
+})
 }
 
 function findTopResult(arr){
   let rank = 0;
   let topResultAddress = ""
   for (let i = 0; i < arr.length; i++){
-    if(arr[i].result.stats.pageviews && rank < Number(arr[i].result.stats.pageviews)){
+    if(arr[i].result.stats.pageviews && rank < Number(arr[i].result.stats.pageviews) && !(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("English Translation"))){
       rank = Number(arr[i].result.stats.pageviews);
       topResultAddress = arr[i].result.url;
     } else {continue;}
@@ -297,9 +343,7 @@ function findTopResult(arr){
 }
 
 
-
 function getOriginalLyrics(keyword){
-  console.log("getOriginalLyrics runs!")
   let url = 'https://api.genius.com/search?q=' + keyword + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
   // const options = {
   //   headers: new Headers({
@@ -320,24 +364,23 @@ function getOriginalLyrics(keyword){
     })
     .then(function(){
       $('.romanized-lyrics').removeClass('hidden');
-      // $('.translated-lyrics').removeClass('hidden');
+      $('.translated-lyrics').removeClass('hidden');
+      oriLyrics = $('div#original-lyrics-text').html();
     });
-  
   })
+}
 
 
 
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
-  $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
-    let lyrics = $(data.contents).find("div.lyrics").text();
+  // $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
+  //   let lyrics = $(data.contents).find("div.lyrics").text();
     // show lyrics in div#original-lyrics-text with <br> in each line
 
     // console.log(lyrics);
     // console.log(romanizeLyrics(lyrics.trim()));
-});
-
-
-}
+// });
+// }
 
 function getVideo(id){
   console.log("getVideo runs!")
@@ -362,6 +405,13 @@ function getYoutubeVideo(str){
 function handleSearch(){
   $('.first-input').submit(function(e){
     e.preventDefault();
+    oriLyrics = "";
+    romLyrics = "";
+    transLyrics = "";
+    $('div#original-lyrics-text').empty()
+    $('div#translated-lyrics-text').empty()
+    $('div#romanized-lyrics-text').empty();
+    $('.original-lyrics').addClass('hidden');
     const searchText = $('#song').val();
     const videoId = getYoutubeVideo(searchText);
     getOriginalLyrics(searchText);
@@ -372,6 +422,8 @@ function handleApiApp(){
   handleSearch();
   handleRomanizedLyrics();
   handleTranslatedLyrics();
+  getOriginalLyricsAgain();
 }
 
-$(handleApiApp);
+$(handleApiApp)
+
