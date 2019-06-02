@@ -389,6 +389,7 @@ function handleSearch(){
     $('.original-lyrics').addClass('hidden');
     const searchText = $('#song').val();
     const videoId = getYoutubeVideo(searchText);
+    $('div.container').removeClass('hidden');
     getOriginalLyrics(searchText);
   });
 }
