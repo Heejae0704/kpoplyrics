@@ -1,9 +1,3 @@
-// when the user clicks search button
-// the input text is stored as variable
-// the variable is used with 'kpop official music video' in Youtube search
-// and extract the videoId of the top result
-// and use the videoId to load the IFrame player API
-
 'use strict'
 
 var oriLyrics = "";
@@ -238,9 +232,7 @@ function romanizeLyrics(lyrics){
   for (let i = 0; i < sentenceArr.length; i++){
       resultArr.push(romanizeSentence(sentenceArr[i]));
   }
-
   let romanizeLyrics = resultArr.join("\n");
-
   return romanizeLyrics;
 }
 
@@ -342,7 +334,6 @@ function findTopResult(arr){
   return topResultAddress;
 }
 
-
 function getOriginalLyrics(keyword){
   let url = 'https://api.genius.com/search?q=' + keyword + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
   // const options = {
@@ -370,26 +361,11 @@ function getOriginalLyrics(keyword){
   })
 }
 
-
-
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
-  // $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
-  //   let lyrics = $(data.contents).find("div.lyrics").text();
-    // show lyrics in div#original-lyrics-text with <br> in each line
-
-    // console.log(lyrics);
-    // console.log(romanizeLyrics(lyrics.trim()));
-// });
-// }
 
 function getVideo(id){
-  console.log("getVideo runs!")
-  console.log(id)
-    // 2. This code loads the IFrame Player API code asynchronously.
    $('iframe.video').prop('src', "https://www.youtube.com/embed/"+id)
   }
-
-
 
 function getYoutubeVideo(str){
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
@@ -426,4 +402,3 @@ function handleApiApp(){
 }
 
 $(handleApiApp)
-
