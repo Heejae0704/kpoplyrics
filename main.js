@@ -273,8 +273,36 @@ function handleRomanizedLyrics(){
   // show lyrics in div#romanized-lyrics-text with <br> in each line
 }
 
+function findTopResult(arr){
+  let rank = 0;
+  let topResultAddress = ""
+  for (let i = 0; i < arr.length; i++){
+    if(rank < Number(arr[i].stats.pageviews)){
+      topResultAddress = arr[i].url;
+    } else {continue;}
+  }
+  return topResultAddress;
+}
+
+
 function getOriginalLyrics(keyword){
   console.log("getOriginalLyrics runs!")
+  let url = 'https://api.genius.com/search?q=' + keyword;
+  fetch(url)
+  .then(response => response.json())
+  .then(responseJson => {
+    let geniusAddress = findTopResult(responseJson.response.hits)
+    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(geniusAddress) + '&callback=?', function(data) {    
+      let lyrics = $(data.contents).find("div.lyrics").text();
+      // show lyrics in div#original-lyrics-text with <br> in each line
+      console.log(lyrics.trim());
+      console.log(romanizeLyrics(lyrics.trim()));
+    });
+  
+  })
+
+
+
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
   $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent('https://genius.com/Bts-boy-with-luv-lyrics') + '&callback=?', function(data) {    
     let lyrics = $(data.contents).find("div.lyrics").text();
@@ -323,5 +351,3 @@ function handleApiApp(){
 }
 
 $(handleApiApp);
-
-
