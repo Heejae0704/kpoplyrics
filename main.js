@@ -263,7 +263,6 @@ function getTrans(url){
   .then(responseJson => {
     let translatedLyricsArr = []
     for (let i = 0; i < responseJson.data.translations.length; i++){
-        console.log(responseJson.data.translations[i].translatedText.replace('&#39;',"'"));
         translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'"));
     }
     let translatedLyrics = translatedLyricsArr.join('<br>\n');
