@@ -258,11 +258,11 @@ function searchQueryBuilder(textArr){
 }
 
 function getTrans(url){
-  const options = {
-    headers: new Headers({
-      "Access-Control-Allow-Origin" : "*"
-    })
-  };
+  // const options = {
+  //   headers: new Headers({
+  //     "Access-Control-Allow-Origin" : "*"
+  //   })
+  // };
   fetch(url)
   .then(response => response.json())
   .then(responseJson => {
