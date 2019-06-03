@@ -349,7 +349,12 @@ function getOriginalLyrics(keyword){
   //   })
   // };
   fetch(url)
-  .then(response => response.json())
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
   .then(responseJson => {
     console.log(responseJson.response.hits)
     let geniusAddress = findTopResult(responseJson.response.hits)
@@ -363,6 +368,9 @@ function getOriginalLyrics(keyword){
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
       oriLyrics = $('div#original-lyrics-text').html();
+    })
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
   })
 }
@@ -374,14 +382,22 @@ function getVideo(id){
   }
 
 function getYoutubeVideo(str){
-  var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
+  var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
   fetch(url)
-  .then(response => response.json())
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
   .then(responseJson => {
       var youtubeVideoId = responseJson.items[0].id.videoId;
       return youtubeVideoId
     })
   .then(id => {getVideo(id)})
+  .catch(err => {
+    $('#js-error-message').text(`Something went wrong: ${err.message}`);
+  });
   }
 
 function handleSearch(){

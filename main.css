@@ -3,15 +3,24 @@
     text-align: center;
 }
 
-.dog-image {
-    width: 300px;
+body {
+    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
 }
 
-.pic-result {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+button, input[type="text"] {
+    padding: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button {
+    font-size: 12px;
+}
+
+form {
+    margin-bottom: 10px;
 }
 
 section {
@@ -67,4 +76,8 @@ div {
         max-width: 854px;
         max-height: 480px;
     }
+}
+
+#js-error-message {
+    color: red;
 }

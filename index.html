@@ -11,6 +11,7 @@
 <body>
     <main>
         <header>
+            <h1>KpopLyrics</h1>
             <p>Type in the name of a K-pop song and the artist to Get the Video and Lyrics!</p> 
             <p>(Original/Romanized/Translated)</p>
         </header>
@@ -18,7 +19,8 @@
             <form class="first-input">
                 <label for="song">Artist & Song Name: </label>
                 <input name="song" id="song" type="text" placeholder="BTS Boys with luv" />
-                <input class="submit-input" type="submit" value="Search">
+                <button class="submit-input">Search</button>
+                <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
             </form>
         </section>
         <div class="container hidden">
@@ -26,14 +28,15 @@
             frameborder="0" allowfullscreen class="video"></iframe>
         </div>
         <form class="original-lyrics hidden">
-            <input class="submit-original-lyrics-button" type="submit" value="Get Original Lyrics!">
+            <button class="submit-original-lyrics-button">Get Original Lyrics!</button>
         </form>
         <form class="romanized-lyrics hidden">
-            <input class="submit-romanized-lyrics-button" type="submit" value="Get Romanized Lyrics!">
+            <button class="submit-romanized-lyrics-button">Get Romanized Lyrics!</button>
         </form>
         <form class="translated-lyrics hidden">
-            <input class="submit-translated-lyrics-button" type="submit" value="Get Translated Lyrics!">
+            <button class="submit-translated-lyrics-button">Get Translated Lyrics!</button>
         </form>
+        <div id="js-error-message"></div>
         <div id="original-lyrics-text"></div>
         <div id="romanized-lyrics-text"></div>
         <div id="translated-lyrics-text"></div>
