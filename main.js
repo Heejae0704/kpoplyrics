@@ -8,6 +8,8 @@ function lyricsToHtml(text){
   let textArr = text.trim().split("\n")
   let htmlStr = "";
   for (let i=0; i<textArr.length; i++){
+    if (textArr[i].includes("Romanized")){break;}
+    if (textArr[i].includes("English Translation")){break;}
     let tempText = textArr[i] + "<br>\n"
     htmlStr = htmlStr.concat(tempText)
   }
