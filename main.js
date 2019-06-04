@@ -341,7 +341,7 @@ function findTopResult(arr){
 }
 
 function getOriginalLyrics(keyword){
-  let url = 'https://api.genius.com/search?q=' + keyword + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(keyword) + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
   // const options = {
   //   headers: new Headers({
   //     "Authorization": 'Bearer AUBy1qVk1NtL9VvhnALD89u7Q2axaVwprMEgoxQ2bvRgYDvXJJeMtmSYurHR6xxf',
