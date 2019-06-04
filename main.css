@@ -3,8 +3,12 @@
     text-align: center;
 }
 
-body {
-    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+*:lang(en) {
+    font-family: 'Roboto', sans-serif;
+}
+
+*:lang(ko) {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 button, input[type="text"] {
