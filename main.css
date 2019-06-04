@@ -7,6 +7,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+    font-weight: 900;
+}
+
 *:lang(ko) {
     font-family: 'Noto Sans KR', sans-serif;
 }
