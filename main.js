@@ -358,7 +358,7 @@ function getOriginalLyrics(keyword){
   .then(responseJson => {
     console.log(responseJson.response.hits)
     let geniusAddress = findTopResult(responseJson.response.hits)
-    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(geniusAddress) + '&callback=?', function(data) {    
+    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + geniusAddress + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
       // show lyrics in div#original-lyrics-text with <br> in each line
@@ -403,17 +403,19 @@ function getYoutubeVideo(str){
 function handleSearch(){
   $('.first-input').submit(function(e){
     e.preventDefault();
+    $('#js-error-message').empty();
     oriLyrics = "";
     romLyrics = "";
     transLyrics = "";
-    $('div#original-lyrics-text').empty()
-    $('div#translated-lyrics-text').empty()
+    $('div#original-lyrics-text').empty();
+    $('div#translated-lyrics-text').empty();
     $('div#romanized-lyrics-text').empty();
     $('.original-lyrics').addClass('hidden');
     const searchText = $('#song').val();
     const videoId = getYoutubeVideo(searchText);
     $('div.container').removeClass('hidden');
     getOriginalLyrics(searchText);
+    $('#song').val('');
   });
 }
 
