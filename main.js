@@ -1,5 +1,7 @@
 'use strict'
 
+//js version 2.1
+
 var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
