@@ -20,8 +20,12 @@ function htmlToText(htmlStr){
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
-    let tempText = htmlStrArr[i] + "\n"
-    text = text.concat(tempText)
+    if (htmlStrArr[i] === '<h2 lang="en">Original Lyrics<h2>\n'){
+      continue;
+    } else {
+      let tempText = htmlStrArr[i] + "\n"
+      text = text.concat(tempText)
+    }
   }
   return text;
 }
@@ -332,7 +336,7 @@ function getOriginalLyrics(url){
   console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
-      let lyricsHtml = "<h2>Original Lyrics</h2>" + lyricsToHtml(lyrics);
+      let lyricsHtml = '<h2 lang="en">Original Lyrics</h2>' + lyricsToHtml(lyrics);
       console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
