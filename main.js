@@ -5,6 +5,7 @@ var romLyrics = "";
 var transLyrics = "";
 
 function lyricsToHtml(text){
+  console.log(text)
   let textArr = text.trim().split("\n")
   let htmlStr = "";
   for (let i=0; i<textArr.length; i++){
@@ -337,7 +338,7 @@ function getOriginalLyrics(url){
   console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
-      let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>
+      let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n
   ${lyricsToHtml(lyrics)}`
       console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
