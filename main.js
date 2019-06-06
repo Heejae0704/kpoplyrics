@@ -49,8 +49,8 @@ function getTrans(url){
         translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'"));
     }
     let translatedLyrics = translatedLyricsArr.join('<br>\n');
-    $('div#translated-lyrics-text').html(translatedLyrics);
-    transLyrics = $('div#translated-lyrics-text').html(); 
+    $('#translated-lyrics-text').html(translatedLyrics);
+    transLyrics = $('#translated-lyrics-text').html(); 
   })
   .then(function(){
     $('.romanized-lyrics').removeClass('hidden');
@@ -62,10 +62,10 @@ function getTrans(url){
 function handleTranslatedLyrics(){
   $('form.translated-lyrics').submit(event => {
     event.preventDefault();
-    $('div#original-lyrics-text').empty();
-    $('div#romanized-lyrics-text').empty();
+    $('#original-lyrics-text').empty();
+    $('#romanized-lyrics-text').empty();
     if (transLyrics !== "") {
-      $('div#translated-lyrics-text').html(transLyrics);
+      $('#translated-lyrics-text').html(transLyrics);
     } else {
     let oriLyricsText = htmlToText(oriLyrics);
     let oriLyricsTextArr = makeStrArr(oriLyricsText);
@@ -79,9 +79,9 @@ function handleTranslatedLyrics(){
 function getOriginalLyricsAgain(){
   $('form.original-lyrics').submit(event => {
     event.preventDefault();
-    $('div#original-lyrics-text').html(oriLyrics)
-    $('div#translated-lyrics-text').empty()
-    $('div#romanized-lyrics-text').empty();
+    $('#original-lyrics-text').html(oriLyrics)
+    $('#translated-lyrics-text').empty()
+    $('#romanized-lyrics-text').empty();
     $('.romanized-lyrics').removeClass('hidden');
     $('.translated-lyrics').removeClass('hidden');
     $('.original-lyrics').addClass('hidden');
@@ -94,9 +94,9 @@ function handleRomanizedLyrics(){
     let oriLyricsText = htmlToText(oriLyrics);
     let romLyricsText = romanizeLyrics(oriLyricsText);
     romLyrics = lyricsToHtml(romLyricsText);
-    $('div#original-lyrics-text').empty()
-    $('div#translated-lyrics-text').empty()
-    $('div#romanized-lyrics-text').html(romLyrics);
+    $('#original-lyrics-text').empty()
+    $('#translated-lyrics-text').empty()
+    $('#romanized-lyrics-text').html(romLyrics);
     $('.romanized-lyrics').addClass('hidden');
     $('.translated-lyrics').removeClass('hidden');
     $('.original-lyrics').removeClass('hidden');
