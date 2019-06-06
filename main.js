@@ -454,9 +454,9 @@ function handleSearch(){
       oriLyrics = "";
       romLyrics = "";
       transLyrics = "";
-      $('#original-lyrics-text').empty();
-      $('#translated-lyrics-text').empty();
-      $('#romanized-lyrics-text').empty();
+      $('section#original-lyrics-text').html('');
+      $('section#translated-lyrics-text').html('');
+      $('section#romanized-lyrics-text').html('');
       $('.original-lyrics').addClass('hidden');
       getListOfSongs(searchText);
       $('#nav-search-button').val('');
