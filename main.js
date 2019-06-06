@@ -5,16 +5,16 @@ var romLyrics = "";
 var transLyrics = "";
 
 function lyricsToHtml(text){
-  console.log(text)
   let textArr = text.trim().split("\n")
   let htmlStr = "";
-  for (let i=0; i<textArr.length; i++){
+  for (let i=2; i<textArr.length; i++){
     if (textArr[i].includes("Romanized")){break;}
     if (textArr[i].includes("English Translation")){break;}
     if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
     let tempText = textArr[i] + "<br>\n"
     htmlStr = htmlStr.concat(tempText)
   }
+  console.log(htmlStr);
   return htmlStr;
 }
 
@@ -340,7 +340,6 @@ function getOriginalLyrics(url){
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n
   ${lyricsToHtml(lyrics)}`
-      console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
     })
@@ -362,7 +361,6 @@ function getVideo(id){
 
 function getYoutubeVideo(str){
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
-  console.log(url)
   fetch(url)
   .then(response => {
     if (response.ok) {
@@ -389,14 +387,12 @@ function handleSongClick(){
     const keyword = $(this).text();
     const url = $(this).attr('url');
     getYoutubeVideo(keyword);
-    console.log(url);
     getOriginalLyrics(url);
     $('.toggle-buttons').removeClass('hidden');
   })
 }
 
 function filterResult(arr){
-  console.log(arr)
   let newArr = []
   for (let i = 0; i < arr.length; i++){
     if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("Japanese"))){
@@ -426,7 +422,6 @@ function showListOfSongs(arr){
     </li>`
     )
   }
-  console.log(html)
   $('.js-songlist-ul').html(html);
 }
 
