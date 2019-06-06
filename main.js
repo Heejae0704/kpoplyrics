@@ -14,7 +14,6 @@ function lyricsToHtml(text){
     let tempText = textArr[i] + "<br>\n"
     htmlStr = htmlStr.concat(tempText)
   }
-  console.log(htmlStr);
   return htmlStr;
 }
 
@@ -243,10 +242,12 @@ function romanizeLyrics(lyrics){
 
 function makeStrArr(str) {
   var strArr = str.split('\n')
-  for (let i = 0; i < strArr.length; i++){
-      strArr[i] = "q=" + strArr[i] + "&"
+  var newStrArr = [];
+  for (let i = 1; i < strArr.length; i++){
+      newStrArr.push("q=" + strArr[i] + "&");
   }
-  return strArr;  
+  console.log(newStrArr);
+  return newStrArr;  
 }
 
 function searchQueryBuilder(textArr){
@@ -254,9 +255,6 @@ function searchQueryBuilder(textArr){
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
           queryStringArr.push('q=[linebreakhere]&');
-      } else if (textArr[i] === ('q=<h2 lang="en">Original Lyrics</h2>&')){
-        console.log("Detected header")
-        continue;
       } else {
           queryStringArr.push(textArr[i])            
       }
