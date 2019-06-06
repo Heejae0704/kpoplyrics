@@ -1,6 +1,6 @@
 'use strict'
 
-//js ver 2.5
+//js ver 2.6
 
 
 var oriLyrics = "";
@@ -227,6 +227,7 @@ function lyricsToHtml(text){
     if (textArr[i].includes("Romanization")){break;}
     if (textArr[i].includes("English Translation")){break;}
     if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
+    if (textArr[i].includes("oh, oh")){textArr[i] = textArr[i].replace("oh oh", "oh-oh");}
     let tempText = textArr[i] + "<br>\n"
     htmlStr = htmlStr.concat(tempText)
   }
