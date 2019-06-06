@@ -399,8 +399,8 @@ function filterResult(arr){
   newArr.sort((a, b) =>{
     return Number(b.result.id) - Number(a.result.id)
   })
-  if (newArr.length > 10) {
-    newArr = newArr.slice(0,10);
+  if (newArr.length > 20) {
+    newArr = newArr.slice(0,20);
   }
   console.log(newArr)
   return newArr;
@@ -424,7 +424,7 @@ function showListOfSongs(arr){
 }
 
 function getListOfSongs(str){
-  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(str) + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(str) + "&per_page=50&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
   fetch(url)
   .then(response => {
     if (response.ok) {
