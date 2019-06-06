@@ -250,12 +250,13 @@ function searchQueryBuilder(textArr){
   let queryStringArr = []
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
-          queryStringArr.push('[linebreakhere]');
+          queryStringArr.push('q=[linebreakhere]&');
       } else {
           queryStringArr.push(textArr[i])            
       }
   }
   var queryString = queryStringArr.join("")
+  console.log(queryString)
   return queryString;
 }
 
