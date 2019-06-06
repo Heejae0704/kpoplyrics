@@ -1,6 +1,6 @@
 'use strict'
 
-//js version 2.1
+//js version 2.2
 
 var oriLyrics = "";
 var romLyrics = "";
@@ -298,10 +298,11 @@ function handleTranslatedLyrics(){
     let queryString = searchQueryBuilder(oriLyricsTextArr);
     let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
     getTrans(url);
+    }
     $('.romanized-lyrics').removeClass('hidden');
     $('.translated-lyrics').addClass('hidden');
     $('.original-lyrics').removeClass('hidden');
-    }
+
 })
 }
 
