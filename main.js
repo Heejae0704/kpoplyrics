@@ -160,6 +160,7 @@ function handleSongClick(){
     return url;
   })
   .then(function(url){
+    console.log("Here we are! about to start getOriginalLyrics function!")
     getOriginalLyrics(url);
   })
 }
