@@ -381,11 +381,9 @@ function handleSongClick(){
     const keyword = $(this).text();
     const url = $(this).attr('url');
     getYoutubeVideo(keyword);
-    return url;
-  })
-  .then(function(url){
-    console.log("Here we are! about to start getOriginalLyrics function!")
+    console.log(url);
     getOriginalLyrics(url);
+    return url;
   })
 }
 

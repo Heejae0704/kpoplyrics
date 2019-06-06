@@ -62,7 +62,7 @@ h1, .nav-search {
 
 main {
     margin-top: 70px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .heart-icon {
@@ -74,6 +74,7 @@ main {
 
 .main-search {
     text-align: center;
+    font-size: 18px;
 }
 
 #main-search-box {
