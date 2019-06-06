@@ -3,6 +3,11 @@
 var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
+var keyword = "";
+var youtubeVideoId ="";
+var officialMVyoutubeVideoId="";
+var performanceVideoId="";
+var danceVideoId="";
 
 String.prototype.toKorChars = function() { 
   var cCho = [ 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cJung = [ 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ' ], cJong = [ '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cho, jung, jong; 
@@ -346,8 +351,18 @@ function getVideo(id){
    $('iframe.video').prop('src', "https://www.youtube.com/embed/"+ id + "?wmode=opaque&playsinline=1")
   }
 
-function getYoutubeVideo(str){
-  var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
+function getYoutubeVideo(str, videoType){
+  
+  var apikeyArr = [
+    'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
+    'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
+    'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y'
+  ]
+  var ranNum = Math.floor(Math.random()*3);
+  var randomApikey = apikeyArr[ranNum];
+
+  var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + encodeURIComponent(str + ' ' + videoType) + '&key=' + randomApikey;
+
   fetch(url)
   .then(response => {
     if (response.ok) {
@@ -356,7 +371,7 @@ function getYoutubeVideo(str){
     throw new Error(response.statusText);
   })
   .then(responseJson => {
-      var youtubeVideoId = responseJson.items[0].id.videoId;
+      youtubeVideoId = responseJson.items[0].id.videoId;
       return youtubeVideoId
     })
   .then(id => getVideo(id))
@@ -364,14 +379,50 @@ function getYoutubeVideo(str){
   .catch(err => $('#js-error-message').text(`Something went wrong: ${err.message}`))
 }
 
+function handleWatchPerformanceClick(){
+  if (performanceVideoId !== ''){
+    getVideo(performanceVideoId);
+  } else {
+    $('.live-performance-video-button').click(function(){
+      getYoutubeVideo(keyword, 'kpop performance m countdown special stage');
+      performanceVideoId = youtubeVideoId;
+      $('.video-header').html(keyword + "<br>Stage Performance Video");
+    })
+  }
+}
+
+function handleDancePracticeClick(){
+  if (danceVideoId !== ''){
+    getVideo(danceVideoId);
+  } else {
+    $('.dance-practice-video-button').click(function(){
+      getYoutubeVideo(keyword, 'kpop dance practice official');
+      danceVideoId = youtubeVideoId;
+      $('.video-header').html(keyword + "<br>Dance Practice Video");
+    })
+  }
+}
+
+function handleOfficialMVClick(){
+  if (officialMVyoutubeVideoId !== ''){
+    getVideo(officialMVyoutubeVideoId);
+  } else {
+    $('.official-mv-video-button').click(function(){
+      getYoutubeVideo(keyword, 'kpop performance m countdown special stage');
+      officialMVyoutubeVideoId = youtubeVideoId;
+      $('.video-header').html(keyword + "<br>Stage Performance Video");
+    })
+  }
+}
+
 function handleSongClick(){
   $('.js-songlist-ul').on('click', '.song-link', function(e){
     e.stopPropagation();
-    const keyword = $(this).text();
+    keyword = $(this).text();
     const url = $(this).attr('url');
-    getYoutubeVideo(keyword);
+    getYoutubeVideo(keyword, 'official kpop music video');
     getOriginalLyrics(url);
-    $('.video-header').html(keyword + "<br>Official Music Video")
+    $('.video-header').html(keyword + "<br>Official Music Video");
     $('.toggle-buttons').removeClass('hidden');
     $('.songlist').addClass('hidden');
   })
@@ -454,6 +505,11 @@ function handleSearch(){
       oriLyrics = "";
       romLyrics = "";
       transLyrics = "";
+      keyword = "";
+      youtubeVideoId="";
+      officialMVyoutubeVideoId="";
+      danceVideoId="";
+      performanceVideoId="";
       $('section#original-lyrics-text').html('');
       $('section#translated-lyrics-text').html('');
       $('section#romanized-lyrics-text').html('');
@@ -474,6 +530,8 @@ function handleApiApp(){
   handleTranslatedLyrics();
   getOriginalLyricsAgain();
   handleSongClick();
+  handleWatchPerformanceClick();
+  handleDancePracticeClick();
 }
 
 $(handleApiApp)
