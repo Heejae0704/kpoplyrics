@@ -442,7 +442,7 @@ function getListOfSongs(str){
 function handleSearch(){
   $('.js-search').submit(function(e){
     e.preventDefault();
-    $('.songlist, .video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .tranlated-lyrics').addClass('hidden');
+    $('.songlist, .video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics').addClass('hidden');
     let searchText = ""
     if ($(this).attr('id') === 'nav-search'){
       searchText = $('#nav-search-box').val();
