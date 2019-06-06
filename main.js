@@ -1,7 +1,5 @@
 'use strict'
 
-//js version 2.2
-
 var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
@@ -248,7 +246,6 @@ function makeStrArr(str) {
   for (let i = 1; i < strArr.length; i++){
       newStrArr.push("q=" + strArr[i] + "&");
   }
-  console.log(newStrArr);
   return newStrArr;  
 }
 
@@ -262,7 +259,6 @@ function searchQueryBuilder(textArr){
       }
   }
   var queryString = queryStringArr.join("")
-  console.log(queryString)
   return queryString;
 }
 

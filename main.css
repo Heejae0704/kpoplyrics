@@ -54,7 +54,7 @@ h1, .nav-search {
     background-color: lightgray;
     color: black;
     border: none; 
-    margin-left: -3px;
+    margin-left: 0;
 }
 
 #nav-search-box:focus, #main-search-box:focus {
@@ -93,7 +93,7 @@ main {
     background-color: white;
     color: black;
     border: none; 
-    margin-left: -3px;
+    margin-left: 0;
 }
 
 section {
