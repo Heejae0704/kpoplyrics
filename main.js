@@ -140,6 +140,9 @@ function getYoutubeVideo(str){
       return youtubeVideoId
     })
   .then(id => {getVideo(id)})
+  .then(function(){
+    $('.video-container').removeClass('hidden');
+  })
   .catch(err => {
     $('#js-error-message').text(`Something went wrong: ${err.message}`);
   });
