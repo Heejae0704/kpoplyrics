@@ -408,9 +408,9 @@ function handleOfficialMVClick(){
     getVideo(officialMVyoutubeVideoId);
   } else {
     $('.official-mv-video-button').click(function(){
-      getYoutubeVideo(keyword, 'kpop performance m countdown special stage');
+      getYoutubeVideo(keyword, 'official kpop music video');
       officialMVyoutubeVideoId = youtubeVideoId;
-      $('.video-header').html(keyword + "<br>Stage Performance Video");
+      $('.video-header').html(keyword + "<br>Official Music Video");
     })
   }
 }
