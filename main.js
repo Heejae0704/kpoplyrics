@@ -104,6 +104,7 @@ function handleRomanizedLyrics(){
 }
 
 function getOriginalLyrics(url){
+  console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + url + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
