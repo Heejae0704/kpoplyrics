@@ -242,10 +242,9 @@ function romanizeLyrics(lyrics){
 
 function makeStrArr(str) {
   var strArr = str.split('\n')
-  for (let i = 0; i < strArr.length; i++){
+  for (let i = 1; i < strArr.length; i++){
       strArr[i] = "q=" + strArr[i] + "&"
   }
-  console.log(strArr);
   return strArr;  
 }
 
@@ -404,13 +403,11 @@ function filterResult(arr){
   if (newArr.length > 20) {
     newArr = newArr.slice(0,20);
   }
-  console.log(newArr)
   return newArr;
 }
 
 
 function showListOfSongs(arr){
-  console.log(arr)
   let html = ""
   $('.js-songlist-ul').html("")
   for (let i=0; i<arr.length; i++){
