@@ -22,7 +22,7 @@ function htmlToText(htmlStr){
   // htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
-  for (let i=1; i<htmlStrArr.length; i++){
+  for (let i=0; i<htmlStrArr.length; i++){
       let tempText = htmlStrArr[i] + "\n"
       text = text.concat(tempText)
   }
@@ -306,7 +306,7 @@ function handleTranslatedLyrics(){
 function getOriginalLyricsAgain(){
   $('form.original-lyrics').submit(event => {
     event.preventDefault();
-    $('#original-lyrics-text').html(oriLyrics)
+    $('#original-lyrics-text').html('<h2 lang="en">Original Lyrics</h2>\n' + oriLyrics)
     $('#translated-lyrics-text').empty()
     $('#romanized-lyrics-text').empty();
     $('.romanized-lyrics').removeClass('hidden');
@@ -341,7 +341,7 @@ function getOriginalLyrics(url){
     .then(function(){
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
-      oriLyrics = $('#original-lyrics-text').html();
+      oriLyrics = $('#original-lyrics-text').html().replace('<h2 lang="en">Original Lyrics</h2>','');
     })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
