@@ -273,7 +273,7 @@ function getTrans(url){
     for (let i = 0; i < responseJson.data.translations.length; i++){
         translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'").replace('[linebreakhere]','<br>\n'));
     }
-    let translatedLyrics = translatedLyricsArr.join('<br>\n');
+    let translatedLyrics = "<h2>Translated Lyrics</h2>" + translatedLyricsArr.join('<br>\n');
     $('#translated-lyrics-text').html(translatedLyrics);
     transLyrics = $('#translated-lyrics-text').html(); 
   })
@@ -318,7 +318,7 @@ function handleRomanizedLyrics(){
     event.preventDefault();
     let oriLyricsText = htmlToText(oriLyrics);
     let romLyricsText = romanizeLyrics(oriLyricsText);
-    romLyrics = lyricsToHtml(romLyricsText);
+    romLyrics = "<h2>Romanized Lyrics</h2>" + lyricsToHtml(romLyricsText);
     $('#original-lyrics-text').empty()
     $('#translated-lyrics-text').empty()
     $('#romanized-lyrics-text').html(romLyrics);
@@ -332,7 +332,7 @@ function getOriginalLyrics(url){
   console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
-      let lyricsHtml = lyricsToHtml(lyrics);
+      let lyricsHtml = "<h2>Original Lyrics</h2>" + lyricsToHtml(lyrics);
       console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
