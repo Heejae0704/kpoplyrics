@@ -7,7 +7,7 @@ var transLyrics = "";
 function lyricsToHtml(text){
   let textArr = text.trim().split("\n")
   let htmlStr = "";
-  for (let i=2; i<textArr.length; i++){
+  for (let i=0; i<textArr.length; i++){
     if (textArr[i].includes("Romanized")){break;}
     if (textArr[i].includes("English Translation")){break;}
     if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
@@ -19,9 +19,10 @@ function lyricsToHtml(text){
 }
 
 function htmlToText(htmlStr){
+  htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
-  for (let i=0; i<htmlStrArr.length; i++){
+  for (let i=1; i<htmlStrArr.length; i++){
       let tempText = htmlStrArr[i] + "\n"
       text = text.concat(tempText)
   }
@@ -242,7 +243,7 @@ function romanizeLyrics(lyrics){
 
 function makeStrArr(str) {
   var strArr = str.split('\n')
-  for (let i = 1; i < strArr.length; i++){
+  for (let i = 0; i < strArr.length; i++){
       strArr[i] = "q=" + strArr[i] + "&"
   }
   return strArr;  
@@ -282,11 +283,6 @@ function getTrans(url){
     $('#translated-lyrics-text').html(translatedLyrics);
     transLyrics = $('#translated-lyrics-text').html(); 
   })
-  .then(function(){
-    $('.romanized-lyrics').removeClass('hidden');
-    $('.translated-lyrics').addClass('hidden');
-    $('.original-lyrics').removeClass('hidden');
-  })
 }
 
 function handleTranslatedLyrics(){
@@ -302,6 +298,9 @@ function handleTranslatedLyrics(){
     let queryString = searchQueryBuilder(oriLyricsTextArr);
     let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
     getTrans(url);
+    $('.romanized-lyrics').removeClass('hidden');
+    $('.translated-lyrics').addClass('hidden');
+    $('.original-lyrics').removeClass('hidden');
     }
 })
 }
