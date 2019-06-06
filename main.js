@@ -107,6 +107,7 @@ function getOriginalLyrics(url){
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + url + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
+      console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
     })
@@ -128,6 +129,7 @@ function getVideo(id){
 
 function getYoutubeVideo(str){
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + str + ' official kpop music video&key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
+  console.log(url)
   fetch(url)
   .then(response => {
     if (response.ok) {
