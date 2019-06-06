@@ -264,11 +264,6 @@ function searchQueryBuilder(textArr){
 }
 
 function getTrans(url){
-  // const options = {
-  //   headers: new Headers({
-  //     "Access-Control-Allow-Origin" : "*"
-  //   })
-  // };
   fetch(url)
   .then(response => response.json())
   .then(responseJson => {
@@ -292,7 +287,9 @@ function handleTranslatedLyrics(){
     } else {
     let oriLyricsText = htmlToText(oriLyrics);
     let oriLyricsTextArr = makeStrArr(oriLyricsText);
+    console.log(oriLyricsTextArr);
     let queryString = searchQueryBuilder(oriLyricsTextArr);
+    console.log(queryString);
     let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
     getTrans(url);
     }
@@ -341,7 +338,7 @@ function getOriginalLyrics(url){
     .then(function(){
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
-      oriLyrics = $('#original-lyrics-text').html().replace('<h2 lang="en">Original Lyrics</h2>','');
+      oriLyrics = $('#original-lyrics-text').html().replace('<h2 lang="en">Original Lyrics</h2>\n','');
     })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
