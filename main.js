@@ -383,7 +383,6 @@ function handleSongClick(){
     getYoutubeVideo(keyword);
     console.log(url);
     getOriginalLyrics(url);
-    return url;
   })
 }
 
