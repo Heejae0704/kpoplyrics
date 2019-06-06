@@ -327,19 +327,6 @@ function handleRomanizedLyrics(){
 })
 }
 
-function findTopResult(arr){
-  let rank = 0;
-  let topResultAddress = ""
-  for (let i = 0; i < arr.length; i++){
-    if(arr[i].result.stats.pageviews && rank < Number(arr[i].result.stats.pageviews) && !(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("English Translation"))){
-      rank = Number(arr[i].result.stats.pageviews);
-      topResultAddress = arr[i].result.url;
-    } else {continue;}
-  }
-  console.log(topResultAddress)
-  return topResultAddress;
-}
-
 function getOriginalLyrics(keyword){
   let url = 'https://api.genius.com/search?q=' + encodeURIComponent(keyword) + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
   // const options = {
@@ -400,22 +387,94 @@ function getYoutubeVideo(str){
   });
   }
 
+function handleSongClick(){
+  $('.js-songlist-ul').on('click', '.song-link', function(e){
+    e.stopPropagation();
+    const keyword = $(this).text();
+    const id = $(this).attr('id');
+    getYoutubeVideo(keyword);
+    getOriginalLyrics(id);
+  })
+}
+
+function filterResult(arr){
+  console.log(arr)
+  let newArr = []
+  for (let i = 0; i < arr.length; i++){
+    if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("Japanese"))){
+      newArr.push(arr[i])
+    } else {continue;}
+  }
+  newArr.sort((a, b) =>{
+    return Number(b.result.id) - Number(a.result.id)
+  })
+  if (newArr.length > 10) {
+    newArr = newArr.slice(0,10);
+  }
+  console.log(newArr)
+  return newArr;
+}
+
+
+function showListOfSongs(arr){
+  console.log(arr)
+  let html = ""
+  $('.js-songlist-ul').html("")
+  for (let i=0; i<arr.length; i++){
+    html = html.concat(
+  `<li class="song-item">
+      <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket">
+      <span class="song-link" id="${arr[i].result.id}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
+    </li>`
+    )
+  }
+  console.log(html)
+  $('.js-songlist-ul').html(html);
+}
+
+function getListOfSongs(str){
+  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(str) + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  fetch(url)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then(responseJson => {
+    return filterResult(responseJson.response.hits);
+  })
+  .then(responseArr =>{  
+    showListOfSongs(responseArr);  
+  })
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+  })
+}
+
 function handleSearch(){
-  $('.first-input').submit(function(e){
+  $('.js-search').submit(function(e){
     e.preventDefault();
-    $('#js-error-message').empty();
-    oriLyrics = "";
-    romLyrics = "";
-    transLyrics = "";
-    $('div#original-lyrics-text').empty();
-    $('div#translated-lyrics-text').empty();
-    $('div#romanized-lyrics-text').empty();
-    $('.original-lyrics').addClass('hidden');
-    const searchText = $('#song').val();
-    const videoId = getYoutubeVideo(searchText);
-    $('div.container').removeClass('hidden');
-    getOriginalLyrics(searchText);
-    $('#song').val('');
+    const searchText = $('#main-search-box').val();
+    if (searchText !== "") {
+      $('#js-error-message').empty();
+      oriLyrics = "";
+      romLyrics = "";
+      transLyrics = "";
+      console.log("So far so good!")
+      $('div#original-lyrics-text').empty();
+      $('div#translated-lyrics-text').empty();
+      $('div#romanized-lyrics-text').empty();
+      $('.original-lyrics').addClass('hidden');
+      console.log("So far so good!")
+      $('div.container').removeClass('hidden');
+      getListOfSongs(searchText);
+      // getYoutubeVideo(searchText);
+      // getOriginalLyrics(searchText);
+      $('#song').val('');
+    } else {
+      alert("Please type-in KPOP artist name!");
+    }
   });
 }
 
@@ -424,6 +483,7 @@ function handleApiApp(){
   handleRomanizedLyrics();
   handleTranslatedLyrics();
   getOriginalLyricsAgain();
+  handleSongClick();
 }
 
 $(handleApiApp)

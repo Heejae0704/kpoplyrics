@@ -1,51 +1,142 @@
 * {
     box-sizing: border-box;
-    text-align: center;
 }
 
 *:lang(en) {
     font-family: 'Roboto', sans-serif;
 }
 
-h1 {
-    font-weight: 900;
-}
-
 *:lang(ko) {
     font-family: 'Noto Sans KR', sans-serif;
-}
-
-button, input[type="text"] {
-    padding: 5px;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-button {
-    font-size: 12px;
-}
-
-form {
-    margin-bottom: 10px;
-}
-
-section {
-    margin-bottom: 50px;
-}
-
-div {
-    margin-top: 50px;
-    margin-bottom: 50px;
 }
 
 .hidden {
     display: none;
 }
 
+body {
+    margin: 0;
+}
+
+nav {
+    background-color: lightgray;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    padding: 0;
+}
+
+h1, .nav-search {
+    font-weight: 900;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0;
+
+}
+
+#nav-search-box {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid, 2px;
+    border-bottom-color: black;
+    background-color: lightgray;
+    font-size: 18px;
+    width: 40%;
+}
+
+#nav-search-button {
+    background-color: lightgray;
+    color: black;
+    border: none; 
+    margin-left: -3px;
+}
+
+#nav-search-box:focus, #main-search-box:focus {
+    outline: none;
+}
+
+main {
+    margin-top: 70px;
+    font-size: 18px;
+}
+
+.heart-icon {
+    text-align: center;
+    color: pink;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.main-search {
+    text-align: center;
+}
+
+#main-search-box {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid, 2px;
+    border-bottom-color: black;
+    background-color: white;
+    font-size: 18px;
+    width: 60%;
+}
+
+#main-search-button {
+    background-color: white;
+    color: black;
+    border: none; 
+    margin-left: -3px;
+}
+
+section {
+    text-align: left;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 60px;
+}
+
+.song-container {
+    margin-right: 10px;
+}
+
+.album-jacket {
+    display: inline-block;
+    margin-right: 10px;
+    min-width: 50px;
+}
+
+.song-link {
+    text-align: left;
+    cursor: pointer;
+
+}
+
+.song-link:hover {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 854px){
-    .container {
+    .video-container {
         position: relative;
         width: 100%;
         height: 0;
@@ -65,7 +156,7 @@ div {
 
 
 @media screen and (min-width: 855px){
-    .container {
+    .video-container {
         position: relative;
         width: 100%;
         height: 0;

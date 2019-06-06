@@ -4,29 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="web application showing KPOP music video, original lyrics, romanized and translated lyrics.">
-    <title>KPOP MV and Lyrics</title>
+    <meta name="description" content="A web application to search KPOP artists and songs to get the song's original lyrics along with romanized and translated one. Complemented with the official music video of the song">
+    <title>KPOP Lyrics</title>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto:400,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <!-- favicon (generated with https://realfavicongenerator.net/ -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/c236e3931f.js"></script>
 </head>
 <body>
+    <nav role="nav">
+        <form role="search" class="nav-search hidden">
+            <input name="nav-search-box" id="nav-search-box" type="text" />
+            <button id="nav-search-button"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
+        </form>
+        <h1 class="title">Kpop Lyrics</h1>
+        <!-- <img src="img/logo.png" height="40" width="40" alt="Kpop Lyrics"> -->
+    </nav>
     <main>
-        <header>
-            <h1>KpopLyrics</h1>
-            <p>Type in the name of a K-pop song and the artist to Get the Video and Lyrics!</p> 
-            <p>(Original/Romanized/Translated)</p>
-        </header>
-        <section>
-            <form class="first-input">
-                <label for="song">Artist & Song Name: </label>
-                <input name="song" id="song" type="text" placeholder="BTS Boys with luv" />
-                <button class="submit-input">Search</button>
-            </form>
+        <section class="heart-icon">
+                <span style="font-size: 100px"><i class="fas fa-heart"></i></span>
         </section>
-        <div class="container hidden">
+        <form role="search" class="main-search js-search">
+            <label for="main-search-box">Your favorite KPOP Artist (& Song)</label><br><br>
+            <input name="main-serch-box" id="main-search-box" type="text" placeholder="BTS Boy with luv"/>
+            <button id="main-search-button" type="submit"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
+        </form>
+        <section>
+            <p>Search for your favorite KPOP stars and their songs to get original, romanized and tranlated lyrics along with official music video!</p>
+        </section>
+        <section class="songlist">
+            <h2>Song List</h2>
+            <div class="song-container">
+                <ul class="js-songlist-ul">
+                    <li class="song-item">
+                        <img src="https://images.genius.com/f295c83e3ee7a6816b9d15bdadc91510.300x300x1.jpg" alt="album cover" width="50" height="50" align="middle">
+                        <span class="song-link">BTS-boy with Luv</span><br>
+                    </li>
+                    <li class="song-item">
+                            <img src="https://images.genius.com/f295c83e3ee7a6816b9d15bdadc91510.300x300x1.jpg" alt="album cover" width="50" height="50" align="middle" class="album-jacket">
+                            <span class="song-link">BTS-boy with Luv asdfjalsidfjasoifiaje</span><br>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- <form class="first-input">
+            <label for="song">Artist & Song Name: </label>
+            <input name="song" id="song" type="text" placeholder="BTS Boys with luv" />
+            <button class="submit-input">Search</button>
+        </form> -->
+
+        <section class="video-container hidden">
+            <h2>Official Music Video</h2>
             <iframe
             frameborder="0" allowfullscreen class="video"></iframe>
-        </div>
+        </section>
         <form class="original-lyrics hidden">
             <button class="submit-original-lyrics-button">Get Original Lyrics!</button>
         </form>
