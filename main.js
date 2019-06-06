@@ -20,7 +20,6 @@ function lyricsToHtml(text){
 
 function htmlToText(htmlStr){
   let htmlStrArr = htmlStr.split("<br>\n")
-  console.log(htmlStrArr);
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
       let tempText = htmlStrArr[i] + "\n"
@@ -246,6 +245,7 @@ function makeStrArr(str) {
   for (let i = 0; i < strArr.length; i++){
       strArr[i] = "q=" + strArr[i] + "&"
   }
+  console.log(strArr);
   return strArr;  
 }
 
