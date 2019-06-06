@@ -108,12 +108,12 @@ function getOriginalLyrics(url){
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
       // show lyrics in div#original-lyrics-text with <br> in each line
-      $('div#original-lyrics-text').html(lyricsHtml);
+      $('#original-lyrics-text').html(lyricsHtml);
     })
     .then(function(){
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
-      oriLyrics = $('div#original-lyrics-text').html();
+      oriLyrics = $('#original-lyrics-text').html();
     })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
