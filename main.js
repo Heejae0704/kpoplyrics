@@ -208,6 +208,9 @@ function getListOfSongs(str){
   .then(responseArr =>{  
     showListOfSongs(responseArr);  
   })
+  .then(function(){
+    $('.songlist').removeClass('hidden');
+  })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
   })
@@ -228,11 +231,8 @@ function handleSearch(){
       $('div#romanized-lyrics-text').empty();
       $('.original-lyrics').addClass('hidden');
       console.log("So far so good!")
-      $('div.container').removeClass('hidden');
       getListOfSongs(searchText);
-      // getYoutubeVideo(searchText);
-      // getOriginalLyrics(searchText);
-      $('#song').val('');
+      $('#nav-search-button').val('');
     } else {
       alert("Please type-in KPOP artist name!");
     }
