@@ -96,7 +96,6 @@ main {
 
 section {
     text-align: left;
-    font-size: 16px;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 40px;
@@ -179,4 +178,25 @@ li {
 
 #js-error-message {
     color: red;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.lang-button {
+    background-color: white;
+    font-size: 16px;
+    border: solid;
+    border-radius: 2px;
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.lang-button:hover {
+    background-color: black;
+    color: white;
 }
