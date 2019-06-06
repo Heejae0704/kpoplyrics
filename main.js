@@ -20,7 +20,7 @@ function htmlToText(htmlStr){
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
-    if (htmlStrArr[i] === '<h2 lang="en">Original Lyrics<h2>\n'){
+    if (htmlStrArr[i] === '<h2 lang="en"> Original Lyrics <h2>\n'){
       continue;
     } else {
       let tempText = htmlStrArr[i] + "\n"
