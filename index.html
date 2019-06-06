@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav role="nav">
-        <form role="search" class="nav-search hidden">
+        <form role="search" class="nav-search js-search hidden" id="nav-search">
             <input name="nav-search-box" id="nav-search-box" type="text" />
             <button id="nav-search-button"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
         </form>
@@ -26,12 +26,12 @@
         <section class="heart-icon">
                 <span style="font-size: 100px"><i class="fas fa-heart"></i></span>
         </section>
-        <form role="search" class="main-search js-search">
+        <form role="search" class="main-search js-search" id="main-search">
             <label for="main-search-box">Your favorite KPOP Artist (& Song)</label><br><br>
             <input name="main-serch-box" id="main-search-box" type="text" placeholder="BTS Boy with luv"/>
-            <button id="main-search-button" type="submit"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
+            <button id="main-search-button"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
         </form>
-        <section>
+        <section class="description">
             <p>Search for your favorite KPOP stars and their songs to get original, romanized and tranlated lyrics along with official music video!</p>
         </section>
         <section class="songlist hidden">
@@ -43,7 +43,7 @@
 
         </section>
         <section class="video-top hidden">
-            <h2>Official Music Video</h2>
+            <h2 class="video-header"></h2>
             <div class="video-container">
                 <iframe
                 frameborder="0" allowfullscreen class="video"></iframe>

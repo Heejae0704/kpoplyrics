@@ -1,8 +1,5 @@
 'use strict'
 
-//js ver 2.6
-
-
 var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
@@ -235,7 +232,6 @@ function lyricsToHtml(text){
 }
 
 function htmlToText(htmlStr){
-  // htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
@@ -291,16 +287,13 @@ function handleTranslatedLyrics(){
     } else {
     let oriLyricsText = htmlToText(oriLyrics);
     let oriLyricsTextArr = makeStrArr(oriLyricsText);
-    console.log(oriLyricsTextArr);
     let queryString = searchQueryBuilder(oriLyricsTextArr);
-    console.log(queryString);
     let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
     getTrans(url);
     }
     $('.romanized-lyrics').removeClass('hidden');
     $('.translated-lyrics').addClass('hidden');
     $('.original-lyrics').removeClass('hidden');
-
 })
 }
 
@@ -328,7 +321,7 @@ function handleRomanizedLyrics(){
     $('.romanized-lyrics').addClass('hidden');
     $('.translated-lyrics').removeClass('hidden');
     $('.original-lyrics').removeClass('hidden');
-})
+  })
 }
 
 function getOriginalLyrics(url){
@@ -343,14 +336,11 @@ function getOriginalLyrics(url){
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
       oriLyrics = $('#original-lyrics-text').html().replace('<h2 lang="en">Original Lyrics</h2>\n\n','');
-      console.log(oriLyrics)
     })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
 }
-
-  // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
 
 function getVideo(id){
    $('iframe.video').prop('src', "https://www.youtube.com/embed/"+ id + "?wmode=opaque&playsinline=1")
@@ -369,14 +359,10 @@ function getYoutubeVideo(str){
       var youtubeVideoId = responseJson.items[0].id.videoId;
       return youtubeVideoId
     })
-  .then(id => {getVideo(id)})
-  .then(function(){
-    $('.video-top').removeClass('hidden');
-  })
-  .catch(err => {
-    $('#js-error-message').text(`Something went wrong: ${err.message}`);
-  });
-  }
+  .then(id => getVideo(id))
+  .then(() => $('.video-top').removeClass('hidden'))
+  .catch(err => $('#js-error-message').text(`Something went wrong: ${err.message}`))
+}
 
 function handleSongClick(){
   $('.js-songlist-ul').on('click', '.song-link', function(e){
@@ -385,7 +371,9 @@ function handleSongClick(){
     const url = $(this).attr('url');
     getYoutubeVideo(keyword);
     getOriginalLyrics(url);
+    $('.video-header').html(keyword + "<br>Official Music Video")
     $('.toggle-buttons').removeClass('hidden');
+    $('.songlist').addClass('hidden');
   })
 }
 
@@ -438,6 +426,10 @@ function getListOfSongs(str){
   .then(function(){
     $('.songlist').removeClass('hidden');
   })
+  .then(function(){
+    $('#nav-search-box').val('');
+    $('#main-search-box').val('');
+  })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
   })
@@ -446,7 +438,12 @@ function getListOfSongs(str){
 function handleSearch(){
   $('.js-search').submit(function(e){
     e.preventDefault();
-    const searchText = $('#main-search-box').val();
+    let searchText = ""
+    if ($(this).attr('id') === 'nav-search'){
+      searchText = $('#nav-search-box').val();
+    } else {
+      searchText = $('#main-search-box').val();
+    }
     if (searchText !== "") {
       $('#js-error-message').empty();
       oriLyrics = "";
@@ -458,6 +455,8 @@ function handleSearch(){
       $('.original-lyrics').addClass('hidden');
       getListOfSongs(searchText);
       $('#nav-search-button').val('');
+      $('.heart-icon, .main-search, .description, .title').addClass('hidden');
+      $('.nav-search').removeClass('hidden');
     } else {
       alert("Please type-in KPOP artist name!");
     }
