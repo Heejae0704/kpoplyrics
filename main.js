@@ -397,15 +397,19 @@ function filterResult(arr){
 function showListOfSongs(arr){
   let html = ""
   $('.js-songlist-ul').html("")
-  for (let i=0; i<arr.length; i++){
-    html = html.concat(
-  `<li class="song-item">
-      <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket">
-      <span class="song-link" url="${arr[i].result.url}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
-    </li>`
-    )
+  if (arr.length === 0){
+    alert("Cannot find any artists or songs! Please try again with different search keywords.")
+  } else {
+    for (let i=0; i<arr.length; i++){
+      html = html.concat(
+    `<li class="song-item">
+        <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket">
+        <span class="song-link" url="${arr[i].result.url}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
+      </li>`
+      )
+    }
+    $('.js-songlist-ul').html(html);
   }
-  $('.js-songlist-ul').html(html);
 }
 
 function getListOfSongs(str){
@@ -438,6 +442,7 @@ function getListOfSongs(str){
 function handleSearch(){
   $('.js-search').submit(function(e){
     e.preventDefault();
+    $('.songlist, .video-top, .toggle-buttons').addClass('hidden');
     let searchText = ""
     if ($(this).attr('id') === 'nav-search'){
       searchText = $('#nav-search-box').val();
