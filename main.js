@@ -103,25 +103,8 @@ function handleRomanizedLyrics(){
 })
 }
 
-function getOriginalLyrics(keyword){
-  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(keyword) + "&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
-  // const options = {
-  //   headers: new Headers({
-  //     "Authorization": 'Bearer AUBy1qVk1NtL9VvhnALD89u7Q2axaVwprMEgoxQ2bvRgYDvXJJeMtmSYurHR6xxf',
-  //     "Access-Control-Allow-Origin" : "*"
-  //   })
-  // };
-  fetch(url)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(response.statusText);
-  })
-  .then(responseJson => {
-    console.log(responseJson.response.hits)
-    let geniusAddress = findTopResult(responseJson.response.hits)
-    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + geniusAddress + '&callback=?', function(data) {    
+function getOriginalLyrics(url){
+    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + url + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
       // show lyrics in div#original-lyrics-text with <br> in each line
@@ -135,7 +118,6 @@ function getOriginalLyrics(keyword){
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
-  })
 }
 
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
@@ -167,9 +149,9 @@ function handleSongClick(){
   $('.js-songlist-ul').on('click', '.song-link', function(e){
     e.stopPropagation();
     const keyword = $(this).text();
-    const id = $(this).attr('id');
+    const url = $(this).attr('url');
     getYoutubeVideo(keyword);
-    getOriginalLyrics(id);
+    getOriginalLyrics(url);
   })
 }
 
@@ -200,7 +182,7 @@ function showListOfSongs(arr){
     html = html.concat(
   `<li class="song-item">
       <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket">
-      <span class="song-link" id="${arr[i].result.id}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
+      <span class="song-link" url="${arr[i].result.url}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
     </li>`
     )
   }
