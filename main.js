@@ -335,7 +335,6 @@ function handleRomanizedLyrics(){
 }
 
 function getOriginalLyrics(url){
-  console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n
@@ -457,12 +456,10 @@ function handleSearch(){
       oriLyrics = "";
       romLyrics = "";
       transLyrics = "";
-      console.log("So far so good!")
       $('div#original-lyrics-text').empty();
       $('div#translated-lyrics-text').empty();
       $('div#romanized-lyrics-text').empty();
       $('.original-lyrics').addClass('hidden');
-      console.log("So far so good!")
       getListOfSongs(searchText);
       $('#nav-search-button').val('');
     } else {
