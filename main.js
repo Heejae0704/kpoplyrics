@@ -350,7 +350,7 @@ function getOriginalLyrics(url){
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
 
 function getVideo(id){
-   $('iframe.video').prop('src', "https://www.youtube.com/embed/"+ id + "?wmode=opaque")
+   $('iframe.video').prop('src', "https://www.youtube.com/embed/"+ id + "?wmode=opaque&playsinline=1")
   }
 
 function getYoutubeVideo(str){
@@ -384,6 +384,7 @@ function handleSongClick(){
     getYoutubeVideo(keyword);
     console.log(url);
     getOriginalLyrics(url);
+    $('.toggle-buttons').removeClass('hidden');
   })
 }
 
