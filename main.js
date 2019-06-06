@@ -442,7 +442,7 @@ function getListOfSongs(str){
 function handleSearch(){
   $('.js-search').submit(function(e){
     e.preventDefault();
-    $('.songlist, .video-top, .toggle-buttons').addClass('hidden');
+    $('.songlist, .video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .tranlated-lyrics').addClass('hidden');
     let searchText = ""
     if ($(this).attr('id') === 'nav-search'){
       searchText = $('#nav-search-box').val();
@@ -454,9 +454,9 @@ function handleSearch(){
       oriLyrics = "";
       romLyrics = "";
       transLyrics = "";
-      $('div#original-lyrics-text').empty();
-      $('div#translated-lyrics-text').empty();
-      $('div#romanized-lyrics-text').empty();
+      $('#original-lyrics-text').empty();
+      $('#translated-lyrics-text').empty();
+      $('#romanized-lyrics-text').empty();
       $('.original-lyrics').addClass('hidden');
       getListOfSongs(searchText);
       $('#nav-search-button').val('');
