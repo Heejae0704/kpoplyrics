@@ -10,6 +10,7 @@ function lyricsToHtml(text){
   for (let i=0; i<textArr.length; i++){
     if (textArr[i].includes("Romanized")){break;}
     if (textArr[i].includes("English Translation")){break;}
+    if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
     let tempText = textArr[i] + "<br>\n"
     htmlStr = htmlStr.concat(tempText)
   }
@@ -252,12 +253,9 @@ function searchQueryBuilder(textArr){
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
           queryStringArr.push('q=[linebreakhere]&');
-      } else if (textArr[i].includes('&amp;')){
-        console.log('detected &')
-          queryStringArr.push(textArr[i].replace('&amp;','and'));
-      } else if (textArr[i].includes('<h2 lang="ko"> Original Lyrics </h2>')){
+      } else if (textArr[i] === ('q=<h2 lang="en">Original Lyrics</h2>&')){
         console.log("Detected header")
-        queryStringArr.push(textArr[i].replace('<h2 lang="ko"> Original Lyrics </h2>', ''))
+        continue;
       } else {
           queryStringArr.push(textArr[i])            
       }
@@ -325,7 +323,7 @@ function handleRomanizedLyrics(){
     event.preventDefault();
     let oriLyricsText = htmlToText(oriLyrics);
     let romLyricsText = romanizeLyrics(oriLyricsText);
-    romLyrics = "<h2>Romanized Lyrics</h2>" + lyricsToHtml(romLyricsText);
+    romLyrics = "<h2>Romanized Lyrics</h2>\n" + lyricsToHtml(romLyricsText);
     $('#original-lyrics-text').empty()
     $('#translated-lyrics-text').empty()
     $('#romanized-lyrics-text').html(romLyrics);
@@ -339,7 +337,7 @@ function getOriginalLyrics(url){
   console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
-      let lyricsHtml = '<h2 lang="en">Original Lyrics</h2>' + lyricsToHtml(lyrics);
+      let lyricsHtml = '<h2 lang="en">Original Lyrics</h2>\n' + lyricsToHtml(lyrics);
       console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
