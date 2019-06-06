@@ -4,31 +4,6 @@ var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
 
-function lyricsToHtml(text){
-  let textArr = text.trim().split("\n")
-  let htmlStr = "";
-  for (let i=0; i<textArr.length; i++){
-    if (textArr[i].includes("Romanized")){break;}
-    if (textArr[i].includes("Romanization")){break;}
-    if (textArr[i].includes("English Translation")){break;}
-    if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
-    let tempText = textArr[i] + "<br>\n"
-    htmlStr = htmlStr.concat(tempText)
-  }
-  return htmlStr;
-}
-
-function htmlToText(htmlStr){
-  // htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
-  let htmlStrArr = htmlStr.split("<br>\n")
-  let text = "";
-  for (let i=0; i<htmlStrArr.length; i++){
-      let tempText = htmlStrArr[i] + "\n"
-      text = text.concat(tempText)
-  }
-  return text;
-}
-
 String.prototype.toKorChars = function() { 
   var cCho = [ 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cJung = [ 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ' ], cJong = [ '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cho, jung, jong; 
   var str = this, cnt = str.length, chars = [], cCode; 
@@ -241,10 +216,35 @@ function romanizeLyrics(lyrics){
   return romanizeLyrics;
 }
 
+function lyricsToHtml(text){
+  let textArr = text.trim().split("\n")
+  let htmlStr = "";
+  for (let i=0; i<textArr.length; i++){
+    if (textArr[i].includes("Romanized")){break;}
+    if (textArr[i].includes("Romanization")){break;}
+    if (textArr[i].includes("English Translation")){break;}
+    if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
+    let tempText = textArr[i] + "<br>\n"
+    htmlStr = htmlStr.concat(tempText)
+  }
+  return htmlStr;
+}
+
+function htmlToText(htmlStr){
+  // htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
+  let htmlStrArr = htmlStr.split("<br>\n")
+  let text = "";
+  for (let i=0; i<htmlStrArr.length; i++){
+      let tempText = htmlStrArr[i] + "\n"
+      text = text.concat(tempText)
+  }
+  return text;
+}
+
 function makeStrArr(str) {
   var strArr = str.split('\n')
   var newStrArr = [];
-  for (let i = 1; i < strArr.length; i++){
+  for (let i = 0; i < strArr.length; i++){
       newStrArr.push("q=" + strArr[i] + "&");
   }
   return newStrArr;  
