@@ -19,7 +19,7 @@ function lyricsToHtml(text){
 }
 
 function htmlToText(htmlStr){
-  htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
+  // htmlStr = htmlStr.replace('<h2 lang="en">Original Lyrics</h2>', '')
   let htmlStrArr = htmlStr.split("<br>\n")
   let text = "";
   for (let i=1; i<htmlStrArr.length; i++){
