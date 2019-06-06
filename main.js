@@ -250,7 +250,7 @@ function searchQueryBuilder(textArr){
   let queryStringArr = []
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
-          textArr[i] = '[linebreakhere]';
+          queryStringArr.push('[linebreakhere]');
       } else {
           queryStringArr.push(textArr[i])            
       }
@@ -349,7 +349,7 @@ function getOriginalLyrics(url){
   // because of https issue, I've changed the address below from http://www.whateverorigin.org to https://www.whateverorigin.herokuapp.com
 
 function getVideo(id){
-   $('iframe.video').prop('src', "https://www.youtube.com/embed/"+id)
+   $('iframe.video').prop('src', "https://www.youtube.com/embed/"+ id + "?wmode=opaque")
   }
 
 function getYoutubeVideo(str){
