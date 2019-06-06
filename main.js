@@ -18,9 +18,10 @@ function lyricsToHtml(text){
 
 function htmlToText(htmlStr){
   let htmlStrArr = htmlStr.split("<br>\n")
+  console.log(htmlStrArr);
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
-    if (htmlStrArr[i] === '<h2 lang="en"> Original Lyrics <h2>\n'){
+    if (htmlStrArr[i] === '<h2 lang="en"> Original Lyrics <h2>'){
       continue;
     } else {
       let tempText = htmlStrArr[i] + "\n"
@@ -255,6 +256,8 @@ function searchQueryBuilder(textArr){
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
           queryStringArr.push('q=[linebreakhere]&');
+      } else if (textArr[i].includes('&amp;')){
+          queryStringArr.push(textArr[i].replace('&amp;','and'));
       } else {
           queryStringArr.push(textArr[i])            
       }
