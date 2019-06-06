@@ -21,12 +21,8 @@ function htmlToText(htmlStr){
   console.log(htmlStrArr);
   let text = "";
   for (let i=0; i<htmlStrArr.length; i++){
-    if (htmlStrArr[i] === '<h2 lang="en"> Original Lyrics <h2>'){
-      continue;
-    } else {
       let tempText = htmlStrArr[i] + "\n"
       text = text.concat(tempText)
-    }
   }
   return text;
 }
@@ -257,7 +253,11 @@ function searchQueryBuilder(textArr){
       if (textArr[i] === 'q=&') {
           queryStringArr.push('q=[linebreakhere]&');
       } else if (textArr[i].includes('&amp;')){
+        console.log('detected &')
           queryStringArr.push(textArr[i].replace('&amp;','and'));
+      } else if (textArr[i].includes('<h2 lang="ko"> Original Lyrics </h2>')){
+        console.log("Detected header")
+        queryStringArr.push(textArr[i].replace('<h2 lang="ko"> Original Lyrics </h2>', ''))
       } else {
           queryStringArr.push(textArr[i])            
       }
@@ -280,7 +280,7 @@ function getTrans(url){
     for (let i = 0; i < responseJson.data.translations.length; i++){
         translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'").replace('[linebreakhere]','<br>\n'));
     }
-    let translatedLyrics = "<h2>Translated Lyrics</h2>" + translatedLyricsArr.join('<br>\n');
+    let translatedLyrics = "<h2>Translated Lyrics</h2>\n" + translatedLyricsArr.join('<br>\n');
     $('#translated-lyrics-text').html(translatedLyrics);
     transLyrics = $('#translated-lyrics-text').html(); 
   })
