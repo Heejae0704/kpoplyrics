@@ -9,6 +9,7 @@ function lyricsToHtml(text){
   let htmlStr = "";
   for (let i=0; i<textArr.length; i++){
     if (textArr[i].includes("Romanized")){break;}
+    if (textArr[i].includes("Romanization")){break;}
     if (textArr[i].includes("English Translation")){break;}
     if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
     let tempText = textArr[i] + "<br>\n"
