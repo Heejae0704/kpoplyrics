@@ -337,7 +337,8 @@ function getOriginalLyrics(url){
   console.log("function started!")
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
-      let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n` + lyricsToHtml(lyrics);
+      let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>
+  ${lyricsToHtml(lyrics)}`
       console.log(lyricsHtml)
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
