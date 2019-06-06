@@ -250,7 +250,7 @@ function searchQueryBuilder(textArr){
   let queryStringArr = []
   for(let i=0; i<textArr.length; i++){
       if (textArr[i] === 'q=&') {
-          continue;
+          textArr[i] = '[linebreakhere]';
       } else {
           queryStringArr.push(textArr[i])            
       }
@@ -270,7 +270,7 @@ function getTrans(url){
   .then(responseJson => {
     let translatedLyricsArr = []
     for (let i = 0; i < responseJson.data.translations.length; i++){
-        translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'"));
+        translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'").replace('[linebreakhere]','<br>\n'));
     }
     let translatedLyrics = translatedLyricsArr.join('<br>\n');
     $('#translated-lyrics-text').html(translatedLyrics);
