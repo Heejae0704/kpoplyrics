@@ -532,6 +532,7 @@ function handleApiApp(){
   handleSongClick();
   handleWatchPerformanceClick();
   handleDancePracticeClick();
+  handleOfficialMVClick()
 }
 
 $(handleApiApp)
