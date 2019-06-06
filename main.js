@@ -384,6 +384,8 @@ function handleWatchPerformanceClick(){
     getVideo(performanceVideoId);
   } else {
     $('.live-performance-video-button').click(function(){
+      // kpop performance m countdown special stage
+      // or kpop stage mix
       getYoutubeVideo(keyword, 'kpop performance m countdown special stage');
       performanceVideoId = youtubeVideoId;
       $('.video-header').html(keyword + "<br>Stage Performance Video");
