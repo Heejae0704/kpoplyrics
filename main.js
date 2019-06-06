@@ -105,7 +105,7 @@ function handleRomanizedLyrics(){
 
 function getOriginalLyrics(url){
   console.log("function started!")
-    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + url + '&callback=?', function(data) {    
+    $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = lyricsToHtml(lyrics);
       console.log(lyricsHtml)
@@ -157,6 +157,9 @@ function handleSongClick(){
     const keyword = $(this).text();
     const url = $(this).attr('url');
     getYoutubeVideo(keyword);
+    return url;
+  })
+  .then(function(url){
     getOriginalLyrics(url);
   })
 }
