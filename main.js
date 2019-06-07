@@ -433,7 +433,7 @@ function handleSongClick(){
 function filterResult(arr){
   let newArr = []
   for (let i = 0; i < arr.length; i++){
-    if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("Japanese"))){
+    if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("translated")) && !(arr[i].result.full_title.includes("Translated")) && !(arr[i].result.full_title.includes("Japanese"))){
       newArr.push(arr[i])
     } else {continue;}
   }
