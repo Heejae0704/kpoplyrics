@@ -225,8 +225,7 @@ function lyricsToHtml(text){
   let textArr = text.trim().split("\n")
   let htmlStr = "";
   for (let i=0; i<textArr.length; i++){
-    if (textArr[i].includes("Romanized")){break;}
-    if (textArr[i].includes("Romanization")){break;}
+    if (textArr[i].includes("Romaniz")){break;}
     if (textArr[i].includes("English Translat")){break;}
     if (textArr[i].includes("&")){textArr[i] = textArr[i].replace("&", "and");}
     if (textArr[i].includes("oh, oh")){textArr[i] = textArr[i].replace("oh, oh", "oh-oh");}
