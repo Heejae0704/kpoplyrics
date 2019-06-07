@@ -19,7 +19,7 @@ body {
 }
 
 nav {
-    background-color: lightgray;
+    background-color: darkslategrey;
     padding: 10px;
     position: fixed;
     top: 0;
@@ -36,6 +36,7 @@ h1, .nav-search {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 0;
+    color: white;
 
 }
 
@@ -44,15 +45,16 @@ h1, .nav-search {
     border-left: none;
     border-right: none;
     border-bottom: solid, 2px;
-    border-bottom-color: black;
-    background-color: lightgray;
+    border-bottom-color: white;
+    background-color: darkslategray;
     font-size: 18px;
     width: 40%;
+    color: white;
 }
 
 #nav-search-button {
-    background-color: lightgray;
-    color: black;
+    background-color: darkslategrey;
+    color: white;
     border: none; 
     margin-left: 0;
 }
@@ -60,6 +62,21 @@ h1, .nav-search {
 #nav-search-box:focus, #main-search-box:focus {
     outline: none;
 }
+
+.to-landing-page {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: darkslategrey;
+    border: none;
+    cursor: pointer;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
 
 main {
     margin-top: 70px;

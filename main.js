@@ -492,6 +492,22 @@ function getListOfSongs(str){
   })
 }
 
+function variableReset(){
+  $('#js-error-message').empty();
+  oriLyrics = "";
+  romLyrics = "";
+  transLyrics = "";
+  keyword = "";
+  youtubeVideoId="";
+  officialMVyoutubeVideoId="";
+  danceVideoId="";
+  performanceVideoId="";
+  $('section#original-lyrics-text').html('');
+  $('section#translated-lyrics-text').html('');
+  $('section#romanized-lyrics-text').html('');
+  $('.original-lyrics').addClass('hidden');
+}
+
 function handleSearch(){
   $('.js-search').submit(function(e){
     e.preventDefault();
@@ -503,27 +519,23 @@ function handleSearch(){
       searchText = $('#main-search-box').val();
     }
     if (searchText !== "") {
-      $('#js-error-message').empty();
-      oriLyrics = "";
-      romLyrics = "";
-      transLyrics = "";
-      keyword = "";
-      youtubeVideoId="";
-      officialMVyoutubeVideoId="";
-      danceVideoId="";
-      performanceVideoId="";
-      $('section#original-lyrics-text').html('');
-      $('section#translated-lyrics-text').html('');
-      $('section#romanized-lyrics-text').html('');
-      $('.original-lyrics').addClass('hidden');
+      variableReset();
       getListOfSongs(searchText);
       $('#nav-search-button').val('');
       $('.heart-icon, .main-search, .description, .title').addClass('hidden');
-      $('.nav-search').removeClass('hidden');
+      $('.nav-search, .to-landing-page').removeClass('hidden');
     } else {
       alert("Please type-in KPOP artist name!");
     }
   });
+}
+
+function handleLogoClick(){
+  $('.to-landing-page').click(function(){
+    $('.nav-search, .songlist, .video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics, .to-landing-page').addClass('hidden');
+    $('.title, .heart-icon, .main-search, .description').removeClass('hidden');
+    variableReset();
+  })
 }
 
 function handleApiApp(){
@@ -534,7 +546,8 @@ function handleApiApp(){
   handleSongClick();
   handleWatchPerformanceClick();
   handleDancePracticeClick();
-  handleOfficialMVClick()
+  handleOfficialMVClick();
+  handleLogoClick();
 }
 
 $(handleApiApp)
