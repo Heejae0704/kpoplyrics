@@ -50,6 +50,7 @@ h1, .nav-search {
     font-size: 18px;
     width: 40%;
     color: white;
+    border-radius: 0;
 }
 
 #nav-search-button {
@@ -104,6 +105,7 @@ main {
     background-color: white;
     font-size: 18px;
     width: 60%;
+    border-radius: 0;
 }
 
 #main-search-button {
