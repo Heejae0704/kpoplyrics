@@ -516,8 +516,8 @@ function handleSearchEvent(event){
     let searchText = ""
     if ($(this).attr('id') === 'nav-search'){
       searchText = $('#nav-search-box').val();
-    } else if ($(this).attr('id')){
-      searchText = $(this).attr('id');
+    } else if ($(this).attr('searchid')){
+      searchText = $(this).attr('searchid');
     } else {
       searchText = $('#main-search-box').val();
     }
