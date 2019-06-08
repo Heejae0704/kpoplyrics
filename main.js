@@ -337,6 +337,7 @@ function getOriginalLyrics(url){
       $('#original-lyrics-text').html(lyricsHtml);
     })
     .then(function(){
+      $(".spinner-image").addClass('hidden');  
       $('.romanized-lyrics').removeClass('hidden');
       $('.translated-lyrics').removeClass('hidden');
       oriLyrics = $('#original-lyrics-text').html().replace('<h2 lang="en">Original Lyrics</h2>\n\n','');
