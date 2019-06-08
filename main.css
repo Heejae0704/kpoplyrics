@@ -226,6 +226,10 @@ li {
     color: black;
 }
 
+.spinner-image {
+    text-align: center;
+}
+
 #js-error-message {
     color: red;
 }
