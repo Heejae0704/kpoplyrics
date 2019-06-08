@@ -433,15 +433,17 @@ function handleSongClick(){
 function filterResult(arr){
   let newArr = []
   for (let i = 0; i < arr.length; i++){
-    if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("translated")) && !(arr[i].result.full_title.includes("Translated")) && !(arr[i].result.full_title.includes("Japanese"))){
+    if(!(arr[i].result.full_title.includes("Romanized")) && !(arr[i].result.full_title.includes("Genius")) && !(arr[i].result.full_title.includes("translated")) && !(arr[i].result.full_title.includes("Translated")) && !(arr[i].result.full_title.includes("Japanese")) && !(arr[i].result.full_title.includes("English")) && !(arr[i].result.full_title.includes("Chinese")) && !(arr[i].result.primary_artist.name.includes("Dicky")) && !(arr[i].result.primary_artist.name.includes("Vinnie")) && !(arr[i].result.primary_artist.name.includes("WSTRN"))){
       newArr.push(arr[i])
     } else {continue;}
   }
   newArr.sort((a, b) =>{
+    // return Number(b.result.stats.pageviews) - Number(a.result.stats.pageviews)
     return Number(b.result.id) - Number(a.result.id)
   })
-  if (newArr.length > 30) {
-    newArr = newArr.slice(0,30);
+  console.log(newArr.length)
+  if (newArr.length > 40) {
+    newArr = newArr.slice(0,40);
   }
   return newArr;
 }
