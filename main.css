@@ -122,6 +122,23 @@ section {
     margin-top: 40px;
 }
 
+.recommendations {
+    text-align: center;
+}
+
+.given-artist {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.given-artist:hover {
+    text-decoration: underline;
+}
+
 ul {
     list-style: none;
     padding-left: 0;

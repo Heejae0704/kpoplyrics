@@ -509,13 +509,15 @@ function variableReset(){
   $('.original-lyrics').addClass('hidden');
 }
 
-function handleSearch(){
-  $('.js-search').submit(function(e){
-    e.preventDefault();
+function handleSearchEvent(event){
+    event.preventDefault();
+    event.stopPropagation();
     $('.songlist, .video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics').addClass('hidden');
     let searchText = ""
     if ($(this).attr('id') === 'nav-search'){
       searchText = $('#nav-search-box').val();
+    } else if ($(this).attr('id')){
+      searchText = $(this).attr('id');
     } else {
       searchText = $('#main-search-box').val();
     }
@@ -528,7 +530,14 @@ function handleSearch(){
     } else {
       alert("Please type-in KPOP artist name!");
     }
-  });
+}
+
+function handleSearch(){
+  $('.js-search').submit(handleSearchEvent);
+}
+
+function handleRecommendationClick(){
+  $('.recommendations').on('click', '.given-artist',handleSearchEvent);
 }
 
 function handleLogoClick(){
@@ -541,6 +550,7 @@ function handleLogoClick(){
 
 function handleApiApp(){
   handleSearch();
+  handleRecommendationClick();
   handleRomanizedLyrics();
   handleTranslatedLyrics();
   getOriginalLyricsAgain();
