@@ -328,8 +328,7 @@ function handleRomanizedLyrics(){
   })
 }
 
-function getOriginalLyrics(url){
-    $(".spinner-image").removeClass('hidden');  
+function getOriginalLyrics(url){ 
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n
@@ -441,8 +440,8 @@ function filterResult(arr){
   newArr.sort((a, b) =>{
     return Number(b.result.id) - Number(a.result.id)
   })
-  if (newArr.length > 20) {
-    newArr = newArr.slice(0,20);
+  if (newArr.length > 30) {
+    newArr = newArr.slice(0,30);
   }
   return newArr;
 }
@@ -467,7 +466,9 @@ function showListOfSongs(arr){
 }
 
 function getListOfSongs(str){
-  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(str) + "&per_page=50&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  let resultArr = []
+  let url = 'https://api.genius.com/search?q=' + encodeURIComponent(str) + "&per_page=20&access_token=NaZjLHpS-wF08sPfx7NWP3dvzR1AMEiuy0s0g0SuxpUVf6cQD2pg2lDcoC4orHYz";
+  $(".songlist-spinner-image").removeClass('hidden'); 
   fetch(url)
   .then(response => {
     if (response.ok) {
@@ -476,12 +477,36 @@ function getListOfSongs(str){
     throw new Error(response.statusText);
   })
   .then(responseJson => {
-    return filterResult(responseJson.response.hits);
+    console.log(responseJson.response.hits)
+    resultArr = resultArr.concat(responseJson.response.hits)
+    return fetch(url + "&page=2")
   })
-  .then(responseArr =>{  
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then(responseJson => {
+    resultArr = resultArr.concat(responseJson.response.hits)
+    return fetch(url + "&page=3")
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then(responseJson => {
+    resultArr = resultArr.concat(responseJson.response.hits)
+    console.log(resultArr) 
+    return filterResult(resultArr);
+  })
+  .then(responseArr =>{ 
     showListOfSongs(responseArr);  
   })
   .then(function(){
+    $(".songlist-spinner-image").addClass('hidden'); 
     $('.songlist').removeClass('hidden');
   })
   .then(function(){
