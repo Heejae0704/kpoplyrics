@@ -442,7 +442,7 @@ function handleSongClick(){
     getYoutubeVideo(keyword, 'official kpop music video');
     getOriginalLyrics(url);
     $('.video-header').html(keyword + "<br>Official Music Video");
-    $('.toggle-buttons').removeClass('hidden');
+    $('.toggle-buttons, .js-more-from-this-artist').removeClass('hidden');
     $('.songlist').addClass('hidden');
   })
 }
@@ -522,7 +522,7 @@ function getListOfSongs(str){
     return filterResult(resultArr);
   })
   .then(responseArr =>{ 
-    showListOfSongs(responseArr);  
+    showListOfSongs(responseArr);
   })
   .then(function(){
     $(".songlist-spinner-image").addClass('hidden'); 
@@ -551,6 +551,7 @@ function variableReset(){
   $('section#translated-lyrics-text').html('');
   $('section#romanized-lyrics-text').html('');
   $('.original-lyrics').addClass('hidden');
+  $('.js-more-from-this-artist').addClass('hidden');
   $('.video').attr('src','');
 }
 
@@ -597,6 +598,14 @@ function handleLogoClick(){
   })
 }
 
+function handleArtistClick(){
+  $('.js-more-from-this-artist').click(function(){
+    $('.video').attr('src','');
+    $('.video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics .js-more-from-this-artist').addClass('hidden')
+    $('.songlist').removeClass('hidden');
+  })
+}
+
 function handleApiApp(){
   handleSearch();
   handleRecommendationClick();
@@ -610,6 +619,7 @@ function handleApiApp(){
   handleDancePracticeClick();
   handleOfficialMVClick();
   handleLogoClick();
+  handleArtistClick();
 }
 
 $(handleApiApp)

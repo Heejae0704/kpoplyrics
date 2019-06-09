@@ -67,11 +67,26 @@ h1, .nav-search {
 
 .to-landing-page {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 10px;
     background-color: darkslategrey;
     border: none;
     cursor: pointer;
+}
+
+.more-from-this-artist {
+    position: absolute;
+    right: 60px;
+    top: 15px;
+    background-color: darkslategrey;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+}
+
+.more-from-this-artist:hover {
+    text-decoration: underline;
 }
 
 .logo {
@@ -200,6 +215,13 @@ section {
     transition: all 1s ease-in-out;
     width: 100px;
     cursor: pointer;
+  }
+
+  .side {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border: none;
   }
   
   .card:hover {
