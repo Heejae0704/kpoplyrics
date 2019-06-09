@@ -268,6 +268,7 @@ function searchQueryBuilder(textArr){
 }
 
 function getTrans(url){
+  $(".spinner-image").removeClass('hidden'); 
   fetch(url)
   .then(response => response.json())
   .then(responseJson => {
@@ -276,6 +277,7 @@ function getTrans(url){
         translatedLyricsArr.push(responseJson.data.translations[i].translatedText.replace('&#39;',"'").replace('[linebreakhere]','<br>\n'));
     }
     let translatedLyrics = "<h2>Translated Lyrics</h2>\n" + translatedLyricsArr.join('<br>\n');
+    $(".spinner-image").addClass('hidden'); 
     $('#translated-lyrics-text').html(translatedLyrics);
     transLyrics = $('#translated-lyrics-text').html(); 
   })
@@ -329,6 +331,7 @@ function handleRomanizedLyrics(){
 }
 
 function getOriginalLyrics(url){ 
+    $(".spinner-image").removeClass('hidden');  
     $.getJSON('https://whateverorigin.herokuapp.com/get?url=' + encodeURIComponent(url) + '&callback=?', function(data) {    
       let lyrics = $(data.contents).find("div.lyrics").text();
       let lyricsHtml = `<h2 lang="en">Original Lyrics</h2>\n
