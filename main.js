@@ -601,7 +601,7 @@ function handleLogoClick(){
 
 function handleArtistClick(){
   $('.js-more-from-this-artist').click(function(){
-    $('.video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics,  .js-more-from-this-artist, #original-lyrics-text, #romanized-lyrics-text, .translated-lyrics-text').addClass('hidden')
+    $('.video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics,  .js-more-from-this-artist, #original-lyrics-text, #romanized-lyrics-text, .translated-lyrics-text, .spinner-image').addClass('hidden')
     $('.songlist').removeClass('hidden');
     oriLyrics = "";
     romLyrics = "";
