@@ -537,7 +537,7 @@ function variableReset(){
   $('section#translated-lyrics-text').html('');
   $('section#romanized-lyrics-text').html('');
   $('.original-lyrics').addClass('hidden');
-  $('.video').html('');
+  $('.video').attr('src','');
 }
 
 function handleSearchEvent(event){
