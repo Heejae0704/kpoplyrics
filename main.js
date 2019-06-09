@@ -279,7 +279,9 @@ function getTrans(url){
     let translatedLyrics = "<h2>Translated Lyrics</h2>\n" + translatedLyricsArr.join('<br>\n');
     $(".spinner-image").addClass('hidden'); 
     $('#translated-lyrics-text').html(translatedLyrics);
+    $('#translated-lyrics-text').removeClass('hidden');
     transLyrics = $('#translated-lyrics-text').html(); 
+
   })
 }
 
@@ -292,6 +294,9 @@ function handleTranslatedLyrics(){
       $('#translated-lyrics-text').html(transLyrics);
     } else {
     let oriLyricsText = htmlToText(oriLyrics);
+    if (oriLyricsText.length > 2000) {
+      oriLyricsText = oriLyricsText.slice(0, 1999);
+    }
     let oriLyricsTextArr = makeStrArr(oriLyricsText);
     let queryString = searchQueryBuilder(oriLyricsTextArr);
     let url = "https://translation.googleapis.com/language/translate/v2?" + queryString + "key=AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70&target=en&source=ko"
@@ -324,6 +329,7 @@ function handleRomanizedLyrics(){
     $('#original-lyrics-text').empty()
     $('#translated-lyrics-text').empty()
     $('#romanized-lyrics-text').html(romLyrics);
+    $('#romanized-lyrics-text').removeClass('hidden')
     $('.romanized-lyrics').addClass('hidden');
     $('.translated-lyrics').removeClass('hidden');
     $('.original-lyrics').removeClass('hidden');
@@ -338,6 +344,7 @@ function getOriginalLyrics(url){
   ${lyricsToHtml(lyrics)}`
       // show lyrics in div#original-lyrics-text with <br> in each line
       $('#original-lyrics-text').html(lyricsHtml);
+      $('#original-lyrics-text').removeClass('hidden');
     })
     .then(function(){
       $(".spinner-image").addClass('hidden');  
@@ -360,7 +367,7 @@ function getYoutubeVideo(str, videoType){
   'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
   'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
   'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y',
-    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
+  'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
   ]
   var ranNum = Math.floor(Math.random()*4);
   var randomApikey = apikeyArr[ranNum];
