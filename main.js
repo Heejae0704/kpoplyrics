@@ -357,11 +357,15 @@ function getVideo(id){
 function getYoutubeVideo(str, videoType){
   
   var apikeyArr = [
-    'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
-    'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
-    'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y'
+    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
+    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
+    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
+    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
   ]
-  var ranNum = Math.floor(Math.random()*3);
+  // 'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
+  // 'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
+  // 'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y',
+  var ranNum = Math.floor(Math.random()*4);
   var randomApikey = apikeyArr[ranNum];
 
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + encodeURIComponent(str + ' ' + videoType) + '&key=' + randomApikey;
@@ -420,6 +424,19 @@ function handleOfficialMVClick(){
   }
 }
 
+function handleSongImgClick(){
+  $('.js-songlist-ul').on('click', '.album-jacket', function(e){
+    e.stopPropagation();
+    keyword = $(this).attr('keyword');
+    const url = $(this).attr('url');
+    getYoutubeVideo(keyword, 'official kpop music video');
+    getOriginalLyrics(url);
+    $('.video-header').html(keyword + "<br>Official Music Video");
+    $('.toggle-buttons').removeClass('hidden');
+    $('.songlist').addClass('hidden');
+  })
+}
+
 function handleSongClick(){
   $('.js-songlist-ul').on('click', '.song-link', function(e){
     e.stopPropagation();
@@ -461,7 +478,7 @@ function showListOfSongs(arr){
     for (let i=0; i<arr.length; i++){
       html = html.concat(
     `<li class="song-item">
-        <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket">
+        <img src=${arr[i].result.song_art_image_thumbnail_url} alt="album cover" width="50" height="50" align="middle" class="album-jacket" url="${arr[i].result.url}" keyword="${arr[i].result.title} ${arr[i].result.primary_artist.name}">
         <span class="song-link" url="${arr[i].result.url}">${arr[i].result.title} by ${arr[i].result.primary_artist.name}</span>
       </li>`
       )
@@ -567,6 +584,10 @@ function handleSearch(){
   $('.js-search').submit(handleSearchEvent);
 }
 
+function handleRecommendationImgClick(){
+  $('.side').click(handleSearchEvent);
+}
+
 function handleRecommendationClick(){
   $('.recommendations').on('click', '.given-artist',handleSearchEvent);
 }
@@ -582,10 +603,12 @@ function handleLogoClick(){
 function handleApiApp(){
   handleSearch();
   handleRecommendationClick();
+  handleRecommendationImgClick()
   handleRomanizedLyrics();
   handleTranslatedLyrics();
   getOriginalLyricsAgain();
   handleSongClick();
+  handleSongImgClick()
   handleWatchPerformanceClick();
   handleDancePracticeClick();
   handleOfficialMVClick();

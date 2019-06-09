@@ -19,7 +19,7 @@ body {
 }
 
 nav {
-    background-color: darkslategrey;
+    background-color: #2F4F4F;
     padding: 10px;
     position: fixed;
     top: 0;
@@ -51,6 +51,7 @@ h1, .nav-search {
     width: 40%;
     color: white;
     border-radius: 0;
+    max-width: 250px;
 }
 
 #nav-search-button {
@@ -83,7 +84,7 @@ main {
     margin-top: 70px;
     font-size: 16px;
 }
-
+ 
 .heart-icon {
     text-align: center;
     color: pink;
@@ -105,6 +106,7 @@ main {
     background-color: white;
     font-size: 18px;
     width: 60%;
+    max-width: 300px;
     border-radius: 0;
 }
 
@@ -122,22 +124,127 @@ section {
     margin-top: 40px;
 }
 
+.description-article {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .recommendations {
     text-align: center;
 }
 
 .given-artist {
-    background-color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .given-artist:hover {
     text-decoration: underline;
 }
+
+.boys {
+    background-color: #7DA5B3;
+    color: white;
+}
+
+.girls {
+    background-color: #B37484;
+    color: white;
+}
+
+.jacket {
+    width: 100px;
+    height: 100px;
+}
+
+@media screen and (min-width: 769px){
+
+.recommendations {
+    display: none;
+}
+
+.recommendations-jacket {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: 80%
+}
+
+.outer-container {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex: 0 0 100px;
+}
+
+.given-jacket-container {
+    height: 100px;
+    perspective: 600;
+    position: relative;
+    width: 100px;
+  }
+
+  .card {
+    height: 100px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+    width: 100px;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: rotateY(180deg);
+  
+}
+  .card .side {
+    backface-visibility: hidden;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+  }
+
+  .card .back {
+    transform: rotateY(180deg);
+  }
+}
+
+@media screen and (min-width: 768px){
+  .songlist-ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  li {
+      width: 340px;
+      margin-right: 10px;   
+  }
+
+
+.song-container {
+    margin-right: 10px;
+}
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    #original-lyrics-text, #romanized-lyrics-text, #translated-lyrics-text {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 
 ul {
     list-style: none;
@@ -152,14 +259,11 @@ li {
     height: 60px;
 }
 
-.song-container {
-    margin-right: 10px;
-}
-
 .album-jacket {
     display: inline-block;
     margin-right: 10px;
     min-width: 50px;
+    cursor: pointer;
 }
 
 .song-link {
@@ -196,7 +300,7 @@ li {
 }
 
 
-@media screen and (min-width: 855px){
+@media screen and (min-width: 855px) and (max-width: 1023px){
     .video-container {
         position: relative;
         width: 100%;
@@ -216,6 +320,72 @@ li {
         max-width: 855px;
         max-height: 480px;
     }
+}
+
+@media screen and (min-width: 1024px){
+    .result-area {
+        position: relative;
+        width: 100%;
+    }
+
+    .video-header {
+        position: fixed;
+        top: 50px;
+        left: 10px;
+    }
+
+    .video-container {
+        position: fixed;
+        top: 190px;
+        left: 0;
+        width: 50%;
+        height: 0;
+        padding-bottom: 28.125%;
+        max-width: 854px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 855px;
+        max-height: 480px;
+    }
+
+    .video-button-upper-container {
+        position: fixed;
+        width: 50%;
+        top: 160px;
+        left: 0;
+    }
+
+    .toggle-buttons-upper-container {
+        position: fixed;
+        width: 50%;
+        bottom: 80px;
+        left: 0;
+    }
+
+    #original-lyrics-text, #romanized-lyrics-text, #translated-lyrics-text {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: 40px;
+        margin-right: 50px;
+        margin-bottom: 50px;
+    }
+
+    .spinner-upper-container {
+        position: fixed;
+        top: 400px;
+        right: 400px;
+    }
+
+
 }
 
 .video-button-container {

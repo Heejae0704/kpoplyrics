@@ -26,7 +26,7 @@
     </nav>
     <main>
         <section class="heart-icon">
-                <span style="font-size: 100px"><i class="fas fa-heart"></i></span>
+            <span style="font-size: 100px"><i class="fas fa-heart"></i></span>
         </section>
         <form role="search" class="main-search js-search" id="main-search">
             <label for="main-search-box">Your favorite KPOP Artist (& Song)</label><br><br>
@@ -34,50 +34,190 @@
             <button id="main-search-button"><span style="font-size: 18px"><i class="fas fa-search"></i></span></button>
         </form>
         <section class="description">
-            <p>Search for your favorite KPOP stars and their songs to get original, romanized and translated lyrics along with music video, live performance video and dance practice video!</p>
-            <p>Or, you can start with the below most beloved KPOP groups.</p>
+            <p class="description-article">Search for your favorite KPOP stars and their songs to get original, romanized and translated lyrics along with music video, live performance video and dance practice video!</p>
+            <p class="description-article">Or, you can start with the below most beloved KPOP groups.</p>
             <div class="recommendations">
+                <br>
                 <p>
-                    <button class="given-artist" searchid="bts">BTS</button>&nbsp;|&nbsp;
-                    <button class="given-artist" searchid="blackpink">BLACKPINK</button>&nbsp;|&nbsp;
-                    <button class="given-artist" searchid="twice">TWICE</button>
+                    <button class="given-artist boys" searchid="bts">BTS</button>&nbsp;|&nbsp;
+                    <button class="given-artist girls" searchid="blackpink">BLACKPINK</button>&nbsp;|&nbsp;
+                    <button class="given-artist girls" searchid="twice">TWICE</button>
                 <p>
-                    <button class="given-artist" searchid="exo">EXO</button>&nbsp;|&nbsp; 
-                    <button class="given-artist" searchid="ikon">iKON</button>&nbsp;|&nbsp; 
-                    <button class="given-artist" searchid="txt">TXT</button>
+                    <button class="given-artist boys" searchid="exo">EXO</button>&nbsp;|&nbsp;  
+                    <button class="given-artist girls" searchid="mamamoo">Mamamoo</button>&nbsp;|&nbsp; 
+                    <button class="given-artist boys" searchid="txt">TXT</button>&nbsp;|&nbsp; 
+                    <button class="given-artist boys" searchid="nct">NCT</button>
+
                 </p>
                 <p>
-                        <button class="given-artist" searchid="stray-kids">Stray Kids</button>&nbsp;|&nbsp;
-                        <button class="given-artist" searchid="mamamoo">Mamamoo</button>&nbsp;|&nbsp; 
-                        <button class="given-artist" searchid="everglow">Everglow</button>
+                        <button class="given-artist boys" searchid="stray-kids">Stray Kids</button>&nbsp;|&nbsp;
+                        <button class="given-artist girls" searchid="everglow">Everglow</button>&nbsp;|&nbsp;
+                        <button class="given-artist boys" searchid="ikon">iKON</button>
                 </p>
-         </div>
+            </div>
+            <div class="hidden recommendations-jacket">
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="bts">
+                                <img class="jacket" src="img/BTS_300.png" alt="BTS">
+                            </div>
+                            <div class="side back" searchid="bts">
+                                <br>
+                                <p style="text-align:center" class="boys">BTS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="blackpink">
+                                <img class="jacket" src="img/blackpink_300.png" alt="blackpink">
+                            </div>
+                            <div class="side back" searchid="blackpink">
+                                <br>
+                                <p style="text-align:center" class="girls">BLACKPINK</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="twice">
+                                <img class="jacket" src="img/twice_300.png" alt="twice">
+                            </div>
+                            <div class="side back" searchid="twice">
+                                <br>
+                                <p style="text-align:center" class="girls">TWICE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="exo">
+                                <img class="jacket" src="img/exo_300.png" alt="exo">
+                            </div>
+                            <div class="side back" searchid="exo">
+                                <br>
+                                <p style="text-align:center" class="boys">EXO</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="mamamoo">
+                                <img class="jacket" src="img/mamamoo_300.png" alt="mamamoo">
+                            </div>
+                            <div class="side back" searchid="mamamoo">
+                                <br>
+                                <p style="text-align:center" class="girls">MAMAMOO</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="txt">
+                                <img class="jacket" src="img/txt_300.png" alt="txt">
+                            </div>
+                            <div class="side back" searchid="txt">
+                                <br>
+                                <p style="text-align:center" class="boys">TXT</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="nct">
+                                <img class="jacket" src="img/nct_300.png" alt="nct">
+                            </div>
+                            <div class="side back" searchid="nct">
+                                <br>
+                                <p style="text-align:center" class="boys">NCT</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="straykids">
+                                <img class="jacket" src="img/straykids_300.png" alt="straykids">
+                            </div>
+                            <div class="side back" searchid="straykids">
+                                <br>
+                                <p style="text-align:center" class="boys">STRAY KIDS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="everglow">
+                                <img class="jacket" src="img/everglow_300.png" alt="everglow">
+                            </div>
+                            <div class="side back" searchid="everglow">
+                                <br>
+                                <p style="text-align:center" class="girls">EVERGLOW</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer-container">
+                    <div clss="given-jacket-container">
+                        <div class="card">
+                            <div class="side" searchid="ikon">
+                                <img class="jacket" src="img/ikon_300.png" alt="ikon">
+                            </div>
+                            <div class="side back" searchid="ikon">
+                                <br>
+                                <p style="text-align:center" class="boys">iKON</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-   
         <div class="songlist-spinner-image hidden"><img src="img/loadingSpinner.gif" style="width:150; height:150" alt="loading">
         </div>
         <section class="songlist hidden">
             <h2>Song List</h2>
             <div class="song-container">
-                <ul class="js-songlist-ul">
+                <ul class="js-songlist-ul songlist-ul">
                 </ul>
             </div>
 
         </section>
+        <div class="result-area">
         <section class="video-top hidden">
             <h2 class="video-header"></h2>
             <div class="video-container">
                 <iframe
                 frameborder="0" allowfullscreen class="video"></iframe>
             </div>
+            <div class=video-button-upper-container>
             <div class="video-button-container">
             <button class="video-button live-performance-video-button">Watch Performance</button>
             <button class="video-button dance-practice-video-button">Watch Dance</button>
             <button class="video-button official-mv-video-button">Watch MV</button>
             </div>
+            </div>
         </section>
+        <div class="spinner-upper-container">
         <div class="spinner-image hidden"><img src="img/loadingSpinner.gif" style="width:150; height:150" alt="loading">
             </div>
+        </div>
+        <div class=toggle-buttons-upper-container>
         <section class="toggle-buttons hidden">
         <form class="original-lyrics hidden">
             <button class="submit-original-lyrics-button lang-button">Get Original Lyrics</button>
@@ -89,16 +229,20 @@
             <button class="submit-translated-lyrics-button lang-button">Get Translated Lyrics</button>
         </form>
         </section>
-        <div id="js-error-message"></div>
+        </div>
         <section lang="ko" id="original-lyrics-text"></section>
         <section id="romanized-lyrics-text"></section>
         <section id="translated-lyrics-text"></section>
-        <section class="empty-section"></section>
+        <section class="empty-section">
+                <div id="js-error-message"></div>
+                <br><br>
+        </section>
     </main>
         <script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
         <script src="main.js"></script>
+    </div>
 </body>
 </html>
