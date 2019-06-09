@@ -553,6 +553,7 @@ function variableReset(){
   $('.original-lyrics').addClass('hidden');
   $('.js-more-from-this-artist').addClass('hidden');
   $('.video').attr('src','');
+  $('.spinner-image').addClass('hidden');
 }
 
 function handleSearchEvent(event){
