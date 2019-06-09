@@ -357,14 +357,11 @@ function getVideo(id){
 function getYoutubeVideo(str, videoType){
   
   var apikeyArr = [
-    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
-    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
-    'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
+  'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
+  'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
+  'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y',
     'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
   ]
-  // 'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
-  // 'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
-  // 'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y',
   var ranNum = Math.floor(Math.random()*4);
   var randomApikey = apikeyArr[ranNum];
 
