@@ -472,7 +472,6 @@ function filterResult(arr){
     // return Number(b.result.stats.pageviews) - Number(a.result.stats.pageviews)
     return Number(b.result.id) - Number(a.result.id)
   })
-  console.log(newArr.length)
   if (newArr.length > 40) {
     newArr = newArr.slice(0,40);
   }
@@ -510,7 +509,6 @@ function getListOfSongs(str){
     throw new Error(response.statusText);
   })
   .then(responseJson => {
-    console.log(responseJson.response.hits)
     resultArr = resultArr.concat(responseJson.response.hits)
     return fetch(url + "&page=2")
   })
