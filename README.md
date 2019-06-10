@@ -6,4 +6,17 @@ Application link: https://heejae0704.github.io/kpoplyrics
 
 ## Screenshots (Mobile)
 
-![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/01_landing_large.png "Logo Title Text 1")
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/04_landing_mobile.png "Landing Page @ iPhone X")
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/05_songlist_mobile.png "Songlist @ iPhone X")
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/06_content_mobile.png "Video and Lyrics @ iPhone X")
+
+## Screenshots (PC Browser Screen)
+
+Landing Page @ 1224px x 916px
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/01_landing_large.png "Landing Page @ 1224px x 916px")
+
+Songlist
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/02_songlist_large.png "Landing Page @ 1224px x 916px")
+
+Video and Lyrics
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/03_content_large.png "Landing Page @ 1224px x 916px")
