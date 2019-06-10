@@ -212,7 +212,7 @@ section {
     height: 100px;
     position: absolute;
     transform-style: preserve-3d;
-    transition: all 1s ease-in-out;
+    transition: all 300ms ease-in-out;
     width: 100px;
     cursor: pointer;
   }
@@ -235,7 +235,19 @@ section {
     width: 100px;
   }
 
-  .card .back {
+  .boy {
+    background: #eaeaed;
+    color: #0087cc;
+    line-height: 100px;
+    text-align: center;
+    transform: rotateY(180deg);
+  }
+
+  .girl {
+    background: #eaeaed;
+    color: rgb(255, 134, 154);
+    line-height: 100px;
+    text-align: center;
     transform: rotateY(180deg);
   }
 }
