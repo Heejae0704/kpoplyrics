@@ -6,7 +6,7 @@ Application link: https://heejae0704.github.io/kpoplyrics
 
 ## Screenshots (Mobile)
 
-![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/06_mobile_all.png "Mobile Views")
+![alt text](https://github.com/Heejae0704/kpoplyrics/blob/master/img/screenshots/07_mobile_all.png "Mobile Views")
 
 ## Screenshots (PC Browser Screen)
 
