@@ -176,6 +176,7 @@ section {
     height: 100px;
 }
 
+/* Not applying this to iPad screen */
 @media screen and (min-width: 769px){
 
 .recommendations {
@@ -252,6 +253,7 @@ section {
   }
 }
 
+/* Applying this also to iPad screen (the reason of 1px difference) */
 @media screen and (min-width: 768px){
   .songlist-ul {
     display: flex;

@@ -1,5 +1,6 @@
 'use strict'
 
+// Global variables to check the status
 var oriLyrics = "";
 var romLyrics = "";
 var transLyrics = "";
@@ -9,12 +10,13 @@ var officialMVyoutubeVideoId="";
 var performanceVideoId="";
 var danceVideoId="";
 
+// Function for breaking Korean syllables to each Korean alphabets
 String.prototype.toKorChars = function() { 
   var cCho = [ 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cJung = [ 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ' ], cJong = [ '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cho, jung, jong; 
   var str = this, cnt = str.length, chars = [], cCode; 
   for (var i = 0; i < cnt; i++) { 
      cCode = str.charCodeAt(i); 
-     if (cCode == 32) { continue; } // 한글이 아닌 경우 
+     if (cCode == 32) { continue; } // if not Korean 
      if (cCode < 0xAC00 || cCode > 0xD7A3) {
           chars.push(str.charAt(i)); 
           continue; 
@@ -27,12 +29,13 @@ String.prototype.toKorChars = function() {
   //    chars.push(cCho[cho], cJung[jung]); 
   //    if (cJong[jong] !== '') { 
   //       chars.push(cJong[jong]); 
-  // 종성의 위치 파악을 위한 공란 유지
+  //    종성의 위치 파악을 위한 공란 유지
   chars.push(cCho[cho], cJung[jung], cJong[jong]);    
   }
   return chars; 
 }
 
+// To convert Korean character to English alphabet, not each syllable but each word as connected syllables make some exception cases
 function romanizeWord(arr) {
 
   var matchingInitial = {
@@ -285,6 +288,7 @@ function getTrans(url){
   })
 }
 
+//reuse translated lyrics once done with API
 function handleTranslatedLyrics(){
   $('form.translated-lyrics').submit(event => {
     event.preventDefault();
@@ -390,6 +394,8 @@ function getYoutubeVideo(str, videoType){
   .catch(err => $('#js-error-message').text(`Something went wrong: ${err.message}`))
 }
 
+
+//in the same way, use videoID once extracted with API
 function handleWatchPerformanceClick(){
   if (performanceVideoId !== ''){
     getVideo(performanceVideoId);
@@ -462,6 +468,7 @@ function filterResult(arr){
     } else {continue;}
   }
   newArr.sort((a, b) =>{
+    // alternative sorting order
     // return Number(b.result.stats.pageviews) - Number(a.result.stats.pageviews)
     return Number(b.result.id) - Number(a.result.id)
   })
