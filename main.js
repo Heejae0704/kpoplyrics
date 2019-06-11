@@ -402,6 +402,9 @@ function getYoutubeVideo(str, videoType){
   var ranNum = Math.floor(Math.random()*10);
   var randomApikey = apikeyArr[ranNum];
 
+  console.log(ranNum)
+  console.log(randomApikey)
+
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + encodeURIComponent(str + ' ' + videoType) + '&key=' + randomApikey;
 
   fetch(url)
@@ -556,7 +559,6 @@ function getListOfSongs(str){
   })
   .then(responseJson => {
     resultArr = resultArr.concat(responseJson.response.hits)
-    console.log(resultArr) 
     return filterResult(resultArr);
   })
   .then(responseArr =>{ 
