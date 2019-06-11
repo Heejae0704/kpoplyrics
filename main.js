@@ -10,6 +10,27 @@ var officialMVyoutubeVideoId="";
 var performanceVideoId="";
 var danceVideoId="";
 
+
+// reset variables when needed
+function variableReset(){
+  $('#js-error-message').html('');
+  oriLyrics = "";
+  romLyrics = "";
+  transLyrics = "";
+  keyword = "";
+  youtubeVideoId="";
+  officialMVyoutubeVideoId="";
+  danceVideoId="";
+  performanceVideoId="";
+  $('section#original-lyrics-text').html('');
+  $('section#translated-lyrics-text').html('');
+  $('section#romanized-lyrics-text').html('');
+  $('.original-lyrics').addClass('hidden');
+  $('.js-more-from-this-artist').addClass('hidden');
+  $('.video').attr('src','');
+  $('.spinner-image').addClass('hidden');
+}
+
 // Function for breaking Korean syllables to each Korean alphabets
 String.prototype.toKorChars = function() { 
   var cCho = [ 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cJung = [ 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ' ], cJong = [ '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' ], cho, jung, jong; 
@@ -549,25 +570,6 @@ function getListOfSongs(str){
   })
 }
 
-function variableReset(){
-  $('#js-error-message').empty();
-  oriLyrics = "";
-  romLyrics = "";
-  transLyrics = "";
-  keyword = "";
-  youtubeVideoId="";
-  officialMVyoutubeVideoId="";
-  danceVideoId="";
-  performanceVideoId="";
-  $('section#original-lyrics-text').html('');
-  $('section#translated-lyrics-text').html('');
-  $('section#romanized-lyrics-text').html('');
-  $('.original-lyrics').addClass('hidden');
-  $('.js-more-from-this-artist').addClass('hidden');
-  $('.video').attr('src','');
-  $('.spinner-image').addClass('hidden');
-}
-
 function handleSearchEvent(event){
     event.preventDefault();
     event.stopPropagation();
@@ -611,10 +613,13 @@ function handleLogoClick(){
   })
 }
 
+
+//not a good name. probably should have called it goBackToSongList.
 function handleArtistClick(){
   $('.js-more-from-this-artist').click(function(){
     $('.video-top, .toggle-buttons, .original-lyrics, .romanized-lyrics, .translated-lyrics,  .js-more-from-this-artist, #original-lyrics-text, #romanized-lyrics-text, .translated-lyrics-text, .spinner-image').addClass('hidden')
     $('.songlist').removeClass('hidden');
+    $('#js-error-message').html('');
     oriLyrics = "";
     romLyrics = "";
     transLyrics = "";
