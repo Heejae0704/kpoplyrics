@@ -392,9 +392,14 @@ function getYoutubeVideo(str, videoType){
   'AIzaSyAF_FdVgbmmeAmavszHK5afIPzEx1zLHTw',
   'AIzaSyDixCoUssxiFC2DqZQqLxS750NnZwwimlU',
   'AIzaSyAmOv5Rbv70tv_8R4gtD2d-uyNRjF17z7Y',
-  'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70'
+  'AIzaSyBnEtHmvqrLf3yj_fIxbvLL2GIaujdBh70',
+  'AIzaSyDfgfVBd4sMqfgIs4STJV4jDLnpKDHG3DM',
+  'AIzaSyBXd_2Tbd9ChUuaXRk6B8BvH6zRE2g3IsA',
+  'AIzaSyDh1ixJadqgl0svKNEXhtImV9AsnIzpyeI',
+  'AIzaSyBSTO-kRWqKYxfnlkJEsjD19FkBRkg2P8Y',
+  'AIzaSyAHRC636xE5jMpo2COAayug4SlmOkJlGGU'
   ]
-  var ranNum = Math.floor(Math.random()*4);
+  var ranNum = Math.floor(Math.random()*10);
   var randomApikey = apikeyArr[ranNum];
 
   var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=' + encodeURIComponent(str + ' ' + videoType) + '&key=' + randomApikey;
