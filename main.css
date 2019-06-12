@@ -212,10 +212,27 @@ section {
   .card {
     height: 100px;
     position: absolute;
-    transform-style: preserve-3d;
-    transition: all 300ms ease-in-out;
     width: 100px;
     cursor: pointer;
+  }
+
+  .jacket {
+      position: absolute;
+      height: 100px;
+      width: 100px;  
+      z-index: 3;
+  }
+
+  .jacket:hover {
+      z-index: 1;
+      display: none;
+  }
+
+  .back {
+      position: absolute;
+      top: 15px;
+      height: 100px;
+      width: 100px;  
   }
 
   .side {
@@ -225,23 +242,12 @@ section {
     border: none;
   }
   
-  .card:hover {
-    transform: rotateY(180deg);
-  
-}
-  .card .side {
-    backface-visibility: hidden;
-    height: 100px;
-    position: absolute;
-    width: 100px;
-  }
-
   .boy {
     background: #eaeaed;
     color: #0087cc;
     line-height: 100px;
     text-align: center;
-    transform: rotateY(180deg);
+    z-index: 2 
   }
 
   .girl {
@@ -249,8 +255,14 @@ section {
     color: rgb(255, 134, 154);
     line-height: 100px;
     text-align: center;
-    transform: rotateY(180deg);
+    z-index: 2
   }
+
+  .boy:hover, .girl:hover {
+      display: block;
+      z-index: 4;
+  }
+
 }
 
 /* Applying this also to iPad screen (the reason of 1px difference) */
